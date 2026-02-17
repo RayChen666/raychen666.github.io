@@ -20,14 +20,14 @@ const routes: RoutesConfig = {
   "/": true,
   "/about": true,
   "/work": true,
-  "/blog": true,
-  "/gallery": true,
+  "/blog": false,
+  "/gallery": false,
 };
 
 const display: DisplayConfig = {
-  location: true,
-  time: true,
-  themeSwitcher: true,
+  location: false,
+  time: false,
+  themeSwitcher: false,
 };
 
 // Enable password protection on selected routes
