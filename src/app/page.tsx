@@ -1,3 +1,4 @@
+/*
 import {
   Heading,
   Text,
@@ -25,6 +26,7 @@ export async function generateMetadata() {
     image: home.image,
   });
 }
+
 
 export default function Home() {
   return (
@@ -127,4 +129,18 @@ export default function Home() {
       <Mailchimp />
     </Column>
   );
+}*/
+'use client';
+
+import { useEffect } from 'react';
+import { useRouter } from 'next/navigation';
+
+export default function Home() {
+  const router = useRouter();
+  
+  useEffect(() => {
+    router.replace('/about');
+  }, [router]);
+
+  return null;
 }

@@ -9,7 +9,7 @@ const person: Person = {
   avatar: "/images/avatar.jpg",
   email: "chenruitao666666@outlook.com",
   location: "America/New_York", // Expecting the IANA time zone identifier, e.g., 'Europe/Vienna'
-  languages: ["English", "Mandarin"], // optional: Leave the array empty if you don't want to display languages
+  languages: [], // optional: Leave the array empty if you don't want to display languages
 };
 
 const newsletter: Newsletter = {
@@ -47,13 +47,14 @@ const social: Social = [
     link: "https://www.threads.com/@once_ui",
     essential: true,
   },
+  */
   {
     name: "Email",
     icon: "email",
     link: `mailto:${person.email}`,
     essential: true,
   },
-  */
+  
 ];
 
 const home: Home = {
@@ -64,7 +65,7 @@ const home: Home = {
   description: `Portfolio website showcasing my work as a ${person.role}`,
   headline: <>Building bridges between design and code</>,
   featured: {
-    display: true,
+    display: false,
     title: (
       <Row gap="12" vertical="center">
         <strong className="ml-4">Once UI</strong>{" "}
@@ -74,12 +75,10 @@ const home: Home = {
         </Text>
       </Row>
     ),
-    href: "/work/building-once-ui-a-customizable-design-system",
+    href: "",
   },
   subline: (
-    <>
-    I'm Selene, a design engineer at <Text as="span" size="xl" weight="strong">ONCE UI</Text>, where I craft intuitive <br /> user experiences. After hours, I build my own projects.
-</>
+    <></>
   ),
 };
 
@@ -96,7 +95,7 @@ const about: About = {
     display: true,
   },
   calendar: {
-    display: true,
+    display: false,
     link: "https://cal.com",
   },
   intro: {
@@ -104,9 +103,13 @@ const about: About = {
     title: "Introduction",
     description: (
       <>
-        Selene is a Jakarta-based design engineer with a passion for transforming complex challenges
-        into simple, elegant design solutions. Her work spans digital interfaces, interactive
-        experiences, and the convergence of design and technology.
+        Ray is a second-year Master's student in Computer Science at NYU's Courant Institute, 
+        specializing in XR research and development. His work focuses on end-to-end prototyping 
+        of interactive XR experiences, with research interests at the intersection of robot 
+        control, HCI, and Mixed Reality.
+
+        Beyond work, Ray is a classical music enthusiast with four years of vocal training, 
+        and a serious collector of fountain pens, watches, blu-ray discs, and Chinese antiques.
       </>
     ),
   },
