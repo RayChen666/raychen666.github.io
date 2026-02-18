@@ -118,41 +118,77 @@ const about: About = {
     title: "Work Experience",
     experiences: [
       {
-        company: "FLY",
-        timeframe: "2022 - Present",
-        role: "Senior Design Engineer",
+        company: "NYU Future Reality Lab (New York City, NY)",
+        timeframe: "April 2025 - Present",
+        role: "Research Assistant (On-Site)",
         achievements: [
           <>
-            Redesigned the UI/UX for the FLY platform, resulting in a 20% increase in user
-            engagement and 30% faster load times.
+            Collaborated with Agile Robotics And Perception Lab (UC Berkeley) to 
+            develop the WebXR user interface, 6-channel WebSocket (including odometry, 
+            mpl path, final goal, etc) connecting to ROS2 backend for various sensor control 
+            of swarm (5) drone navigation planner (full paper accepted by IEEE ICRA 2026 conference).
           </>,
           <>
-            Spearheaded the integration of AI tools into design workflows, enabling designers to
-            iterate 50% faster.
+            Prototyped a real-time AI chatbot integrated into an online meeting platform Bici, enabling 
+            users to manipulate 3D scene animations via natural language commands; implemented structured 
+            prompt engineering with Google Gemini Studio API to generate executable JSON control code. (work 
+            result will be formatted to proposal submitting to NSF National Funding).
           </>,
+          <>
+            Designed and developed interactive WebXR-based VR lecture experiences for NYU graduate Virtual 
+            Reality course (CSCI-GA 3033), using Node.js and a customized 3D computer graphics framework to 
+            enable real-time, immersive interaction in both teaching and learning.
+          </>
         ],
         images: [
           // optional: leave the array empty if you don't want to display images
+          /*
           {
             src: "/images/projects/project-01/cover-01.jpg",
             alt: "Once UI Project",
             width: 16,
             height: 9,
           },
+          */
         ],
       },
       {
-        company: "Creativ3",
-        timeframe: "2018 - 2022",
-        role: "Lead Designer",
+        company: "Spatial Front, Inc (Washington, D.C.)",
+        timeframe: "July 2023 – August 2023",
+        role: "Data Engineer Intern in Quality Assurance (Remote)",
         achievements: [
           <>
-            Developed a design system that unified the brand across multiple platforms, improving
-            design consistency by 40%.
+            Performed Front End API tests in the GIS (Geographic Information System) developing environment 
+            using Postman and Swagger UI. Compiled 20+ test cases and uploaded on Jira Platform to track display 
+            issues of the web-interface of GIS software.
           </>,
           <>
-            Led a cross-functional team to launch a new product line, contributing to a 15% increase
-            in overall company revenue.
+            Utilized K-means Clustering to determine the performance of newly developed features in a company's 
+            database system via Azure Studio and Docker. Discovered 10+ noisy data sets. Consulted with the manager 
+            and updated the code to solve the issue.
+          </>,
+        ],
+        images: [],
+      },
+      {
+        company: "7thOnline, Inc (New York City, NY)",
+        timeframe: "June 2022 – August 2022",
+        role: "Software Engineer Intern (On-Site)",
+        achievements: [
+          <>
+            Assisted SaaS (Software as a Service) customer support team in adjusting functionalities of software 
+            programs “Wholesale, DTC, and 7thOnline” to satisfy the needs of client companies. Increased the workflow 
+            efficiency of clients by 15%.
+          </>,
+          <>
+            Drafted feasibility reports on the optimization of the CBR (Case-Based Reasoning) and Clustering algorithm 
+            with Dr. Saman Hong to improve the performance of current software, increased the prediction precision of 
+            customer preference by 10%.
+          </>,
+          <>
+            Compiled Java test cases to examine data visualization of the company’s unreleased application “7thLite” on 
+            both PC and mobile platforms, wrote 20+ Bug Reports, and uploaded them to the debugging system to increase 
+            the stability of the new software.
           </>,
         ],
         images: [],
@@ -161,15 +197,16 @@ const about: About = {
   },
   studies: {
     display: true, // set to false to hide this section
-    title: "Studies",
+    title: "Education",
     institutions: [
       {
-        name: "University of Jakarta",
-        description: <>Studied software engineering.</>,
+        name: "New York University",
+        description: <>Master of Science (M.S.) in Computer Science</>,
       },
       {
-        name: "Build the Future",
-        description: <>Studied online marketing and personal branding.</>,
+        name: "The Ohio State University",
+        description: 
+        <>Bachelor of Science (B.S.) in Mathematics & Minor in Computer Science</>,
       },
     ],
   },
@@ -178,18 +215,55 @@ const about: About = {
     title: "Technical skills",
     skills: [
       {
-        title: "Figma",
+        title: "Full-Stack Agent Software Development",
         description: (
-          <>Able to prototype in Figma with Once UI with unnatural speed.</>
+          <>End-to-end web-based AI software development & deployment.</>
+        ),
+        tags: [
+          {
+            name: "HTML",
+            icon: "html5",
+          },
+          {
+            name: "JavaScript",
+            icon: "javascript",
+          },
+          {
+            name: "Java",
+            icon: "java",
+          },
+          {
+            name: "FastAPI",
+            icon: "fastapi",
+          },
+          {
+            name: "LangChain",
+            icon: "langchain",
+          },
+          {
+            name: "Docker",
+            icon: "docker",
+          }
+        ],
+      },
+      {
+        title: "Research Software",
+        description: (
+          <>Begin learnning for composing research paper.</>
         ),
         tags: [
           {
             name: "Figma",
             icon: "figma",
           },
+          {
+            name: "LaTex",
+            icon: "latex",
+          },
         ],
         // optional: leave the array empty if you don't want to display images
         images: [
+          /*
           {
             src: "/images/projects/project-01/cover-02.jpg",
             alt: "Project image",
@@ -202,12 +276,13 @@ const about: About = {
             width: 16,
             height: 9,
           },
+          */
         ],
       },
       {
-        title: "Next.js",
+        title: "WebXR Prototyping",
         description: (
-          <>Building next gen apps with Next.js + Once UI + Supabase.</>
+          <>Proficient prototyping XR user experience for academic research & college education.</>
         ),
         tags: [
           {
@@ -215,24 +290,84 @@ const about: About = {
             icon: "javascript",
           },
           {
-            name: "Next.js",
-            icon: "nextjs",
+            name: "Three.js",
+            icon: "threejs",
           },
           {
-            name: "Supabase",
-            icon: "supabase",
-          },
+            name: "Node.js",
+            icon: "nodejs",
+          }
         ],
         // optional: leave the array empty if you don't want to display images
-        images: [
+        images: [],
+      },
+      {
+        title: "Machine Learning",
+        description: (
+          <>Project & internship experience in computer vision pipeline.</>
+        ),
+        tags: [
           {
-            src: "/images/projects/project-01/cover-04.jpg",
-            alt: "Project image",
-            width: 16,
-            height: 9,
+            name: "TensorFlow",
+            icon: "tensorflow",
+          },
+          {
+            name: "Colab",
+            icon: "colab",
+          },
+          {
+            name: "Mediapipe",
+            icon: "mediapipe",
+          },
+          {
+            name: "OpenCV",
+            icon: "opencv",
+          },
+          {
+            name: "Scikit-learn",
+            icon: "scikitlearn",
+          },
+          {
+            name: "PyTorch",
+            icon: "pytorch",
           },
         ],
+        images: [],
       },
+      {
+        title: "Others",
+        description: (
+          <></>
+        ),
+        tags: [
+          {
+            name: "Gemini API",
+            icon: "gemini",
+          },
+          {
+            name: "Linux",
+            icon: "linux",
+          },
+          {
+            name: "Postman",
+            icon: "postman",
+          },
+          {
+            name: "Jira",
+            icon: "jira",
+          },
+          {
+            name: "MySQL",
+            icon: "sql",
+          },
+          {
+            name: "GitHub",
+            icon: "github",
+          },
+        ],
+        images: [],
+      }
+      
     ],
   },
 };
