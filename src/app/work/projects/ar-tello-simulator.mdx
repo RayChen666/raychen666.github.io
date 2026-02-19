@@ -21,28 +21,75 @@ link: "https://github.com/RayChen666/AR-Tello-Simulator"
 
 ## Overview
 
-For this project, I designed and implemented an end-to-end immersive WebXR prototyping system for real-time drone teleoperation. I combined AR spatial user 
-interfaces and live hardware control. I also built custom 3D interaction widgets using Three.js, OpenXR, and Meta SDK, with a Node.js backend enabling 
-real-time synchronization, multi-client state sharing, and low-latency command streaming to a physical drone.
+For this project, I designed and implemented an end-to-end immersive WebXR prototyping system 
+for real-time drone teleoperation. The system runs entirely 
+in-browser using the WebXR Device API — no native app compilation required — 
+making it instantly deployable on Meta Quest headsets. 
+
+Using open source libraries like Three.js, OpenXR, and Meta SDK, I combined AR spatial user 
+interfaces (custom 3D interaction widgets), with live hardware control. These feed into a full 
+REST + WebSocket pipeline to a Node.js backend, 
+which relays commands with latency handle to the drone in real time. 
+A secondary multi-client WebSocket layer lets a desktop browser mirror the same session as the headset live.
 
 ## Key Features
 
-- **Component Library**: Built a set of modular, reusable UI components using React and styled-components in Next.js, focusing on accessibility and responsiveness.
-- **Theming and Customization**: Integrated a theming system that allows easy switching and customization of color palettes, typography, and layout styles using CSS variables and Figma tokens.
-- **Figma Integration**: Collaborated closely with designers by setting up a shared design library in Figma. This library was synchronized with the codebase, ensuring design handoffs were seamless and that design tokens remained consistent across both platforms.
-- **Documentation and Usage Guidelines**: Developed comprehensive documentation with Storybook to showcase components, usage patterns, and best practices, ensuring the design system is easy to adopt by other teams.
+- **Spatial 3D Interaction Widgets:** All controls are purpose-built Three.js objects — no external 
+UI library. This includes controller-tracked proxy spheres, toroidal activation rings, and radial directional 
+panels with real-time zone highlighting. Text labels rendered with troika-three-text switch color instantly as 
+the user's hand enters each control zone.
+
+- **Two-Handed Activation Gate:** Both controller triggers must be held simultaneously to arm the flight controls. 
+This intentional bi-manual design prevents any accidental command dispatch while the user reaches around in 
+physical space.
+
+- **Real-Time Command Pipeline:** Each gesture in VR translates to a discrete drone flight command — forward, 
+back, left, right, up, down, rotate — sent over HTTP to the Node.js server, which forwards it to the drone via 
+UDP. Commands are queued and serialized so the drone always finishes one action before the next begins.
+
+- **Live Drone Telemetry:** A parallel UDP listener continuously reads the drone's state — pitch, roll, yaw, 
+battery, altitude — and surfaces it through a status endpoint, keeping the system aware of the drone's condition 
+at all times.
+
+- **Keep-Alive Heartbeat:** After takeoff, the system sends a periodic neutral signal to the drone every 8 
+seconds to prevent its built-in auto-land safety timeout from triggering during intentional hover.
+
+- **Multi-Client State Sync:** Multiple browsers can connect to the same session. A late-join sync protocol 
+ensures any new client immediately receives the current scene state — no manual refresh needed.
 
 ## Technologies Used
 
-- **Next.js**: For fast, server-rendered React applications.
-- **Figma**: For creating and managing design assets and prototypes.
-- **Styled-Components**: For styling React components with a modular, themable approach.
-- **Storybook**: For building an interactive, documented component library.
+- **XR Rendering**: Three.js, WebXR Device API, OpenXR (Meta SDK), troika-three-text.
+- **Input**: WebXR controller tracking, gamepad-wrapper.
+- **Frontend**: ES Modules, Webpack 5, HTTPS Dev Server.
+- **Backend**: Node.js, Express.js, WebSocket, Socket.IO.
+- **Drone Communication**: DJI Tello SDK v2, UDP (command + telemetry channels).
+- **Hardware**: DJI Tello, Meta Quest 3, external WiFi Adapter that enables private network connection between 
+localhost server and drone.
 
-## Challenges and Learnings
+## Challenges
 
-One key challenge was balancing the need for flexibility with the desire to maintain design consistency. The solution involved creating well-defined design tokens and establishing clear guidelines for when and how components could be customized. Additionally, setting up effective collaboration workflows between designers and developers using Figma and Git was a learning experience that greatly improved the process.
+Building this system required solving several real-time hardware and UX problems simultaneously. The XR render 
+loop runs up to 90 times per second, so commands are gated to fire only on the moment a hand enters a zone — not 
+while hovering — with a short cooldown between each to prevent flooding the drone. A periodic keep-alive signal 
+prevents the Tello's built-in auto-land timeout from triggering during intentional hover. On the backend, a 
+promise-based command queue ensures each drone action waits for hardware acknowledgment before the next is sent, 
+with per-command timeouts for graceful recovery from dropped UDP packets. Duplicate takeoff and land commands are 
+blocked by one-shot flags that only reset when the opposing action is triggered. Multi-client sessions use a 
+snapshot broadcast protocol so late-joining clients always start from the correct current state. Finally, since 
+WebXR requires HTTPS, the dev server proxies drone API routes from a secure frontend context to the local HTTP 
+backend — keeping hardware access and development workflow both functional.
 
-## Outcome
+## User Interface Design
 
-The design system is now actively used across multiple projects, leading to faster development cycles, fewer design inconsistencies, and improved collaboration between design and development teams. It has become a foundation for scaling our products efficiently while ensuring a cohesive user experience.
+- **Zero-Occlusion Control Panel Design**: all widgets live in the user's lower and higher peripheral 
+field so they never block the view of the drone in flight, leaving a fully clear view during observation.
+- **Inactive State**: A subtle background and instructional text guide the user. Two glowing purple rings float at 
+roughly shoulder height — one on the left, one on the right. All flight controls are hidden.
+- **Active State**: When both hands are inside the rings simultaneously, they turn yellow, the instruction text 
+hides, and the full control layout appears. The drone connection is initiated automatically.
+- **Button Placement**: Activation rings sit at eye/shoulder height for a natural raised-arm gesture. Control 
+panels are lower — a relaxed elbow position during active flight. LAND and TAKEOFF are placed to the sides, angled 
+to face the user naturally.
+
+---

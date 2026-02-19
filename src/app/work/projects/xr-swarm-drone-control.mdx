@@ -1,0 +1,152 @@
+---
+title: "Flying Together - Human Guided Immersive Shared Control for Aerial Robot Teams in Unknown Environments"
+publishedAt: "2026-02-12"
+summary: "Collaborated with Agile Robotics And Perception Lab (UC Berkeley) to develop the WebXR user interface, 
+6-channel WebSocket (including odometry, mpl path, final goal, etc) connecting to ROS2 backend for various sensor 
+control of swarm (5) drone navigation planner (full paper accepted by IEEE ICRA 2026 conference)."
+images:
+  - "/images/projects/project-01/xr-swarm-drone-control-cover-image.jpg"
+  - "/images/projects/project-01/xr-swarm-drone-control-pipeline.jpg"
+  - "/images/projects/project-01/xr-swarm-drone-control-results-1.jpg"
+  - "/images/projects/project-01/xr-swarm-drone-control-results-2.jpg"
+link: "https://github.com/RayChen666/XR-Swarm-Drone-Control"
+---
+
+## Demo Video
+
+<video controls width="100%" style={{ borderRadius: '8px', marginBottom: '2rem' }}>
+  <source src="/images/projects/project-01/xr-swarm-drone-control-Demo-Video.mp4" type="video/mp4" />
+  Your browser does not support the video tag.
+</video>
+
+## Overview
+
+While autonomous multi-robots can achieve safe
+and coordinated navigation, they often struggle to adapt to
+unforeseen conditions and to capture operator-driven objectives
+in unstructured environments. We present a Virtual Reality
+(VR)-based shared control framework for teams of drones
+operating in constrained and unknown environments, enabling
+real-time, user-guided exploration. At the core of our approach
+is a novel, user-guided motion-primitive-based planner that
+computes continuous, collision-free trajectories while continuously 
+integrating operator input. This planner is coupled
+with an admittance controller, allowing the operator to flexibly
+influence team behavior and guide drones toward regions of
+interest that autonomous planners may overlook. The system
+supports mixed-reality operations with both physical and simulated drones, 
+and implements a bilateral VR-based interface,
+allowing the operator to guide the robot team via migration
+points while receiving immediate visual feedback of the team
+state. Experimental results show that shared control improves
+obstacle avoidance, maintains inter-agent spacing, and reduces
+operator effort, demonstrating the feasibility and advantages of
+immersive, human-in-the-loop multi-robot navigation.
+
+## VR Platform & Communication Interface
+
+By providing an immersive 3D interface of both the environment
+and the robot team, VR naturally functions as an integral modality
+for operator input within the shared control loop, enhancing operator situational awareness, 
+enabling intuitive manipulation of migration points, and supporting real-time guidance that complements
+the motion-primitive planner and admittance controller.
+
+In the context of aerial multi-robots teleoperation, WebXR provides the operator 
+with a real-time visualization of the robots,
+trajectories and environmental context. To seamlessly
+synchronize this virtual representation with the physical robots,
+a dedicated UDP WebSocket-based middleware is implemented.
+It bridges the control and perception stack running on the robots
+with the WebXR server running on the headset, enabling real-time
+communication of key visual cues, such as robot odometry, planned
+trajectories, and 3D map. Through this interface, the operator can
+monitor and influence the team in an intuitive, low-latency manner,
+while maintaining a consistent and interactive shared representation
+between the virtual and physical worlds. The implemented topics
+and related messages in the custom WebSocket based communication 
+middleware are both visualized in figure and summarized in
+table below.
+
+<figure style={{ maxWidth: '720px', margin: '2rem auto' }}>
+   <img src="/images/projects/project-01/xr-swarm-drone-control-pipeline.jpg" 
+    alt="Control panel layout" 
+    width="100%"
+  />
+  <figcaption style={{ fontSize: '1.0rem', color: '#aaa', marginTop: '0.5rem' }}>Overview of the system: navigation stack (left), 
+  bidirectional WebSocket communication layer
+(center; topics detailed in Table I), and VR visualization of drones, local planner path, and environment (right).</figcaption>
+</figure>
+
+<table style={{ width: '100%', borderCollapse: 'collapse', marginBottom: '0.5rem' }}>
+  <thead>
+    <tr style={{ borderBottom: '2px solid #444' }}>
+      <th style={{ textAlign: 'left', padding: '0.5rem 1rem 0.5rem 0' }}>Topic Name</th>
+      <th style={{ textAlign: 'left', padding: '0.5rem 1rem' }}>Message Type</th>
+      <th style={{ textAlign: 'left', padding: '0.5rem 0 0.5rem 1rem' }}>Data Transmitted</th>
+    </tr>
+  </thead>
+  <tbody>
+    {[
+      ['robot_odom_i', 'webxr_robot_pos', "Robots' odometry"],
+      ['static_occupancy', 'webxr_static_occupancy', 'Point cloud representing the 3D occupancy map'],
+      ['final_goal', 'webxr_final_goal', 'High level goal in the map'],
+      ['mpl_path', 'webxr_mpl_path', 'Path computed by the motion primitive local planner'],
+      ['take_control', 'webxr_take_control', 'Boolean flag to switch control of the robots'],
+      ['user_target', 'webxr_des_pos', "The user's desired position and orientation"],
+    ].map(([topic, type, data]) => (
+      <tr key={topic} style={{ borderBottom: '1px solid #333' }}>
+        <td style={{ padding: '0.6rem 1rem 0.6rem 0' }}><code>{topic}</code></td>
+        <td style={{ padding: '0.6rem 1rem' }}><code>{type}</code></td>
+        <td style={{ padding: '0.6rem 0 0.6rem 1rem', color: '#aaa' }}>{data}</td>
+      </tr>
+    ))}
+  </tbody>
+</table>
+
+
+## Reault
+The real drone used in the experiments is a quadrotor with a
+total weight of 1.508 kg and thrust-to-weight ratio of 4 : 1. The
+platform is equipped with a PixRacer Pro flight controller and
+an NVIDIA Jetson Orin as the central processing unit, running
+Ubuntu 22.04 and ROS 2. For the perception side, the drone 
+leverages an Intel Realsense D455 stereo camera for localization
+using a customized version of OpenVINS, which estimates
+the robot state at 100 Hz. A neural depth package is adopted
+for mapping purposes, providing a clear depth image as input to the
+NvBlox-based mapping package from which a point cloud is generated. 
+The line of sight of the robot perception is set at 3 m
+with a voxel resolution of 20 cm. The team is composed of two
+additional simulated robots, with their dynamics computed onboard
+the real quadrotor. For the VR interface, we employ the Meta Quest
+2 headset running Meta Horizon OS, a public-level headset suitable
+for research prototyping.
+
+The VR environment is rendered with layered feedback: drones
+as 3D models, ground plane, planned trajectories as 3D strokes,
+and obstacles as a voxel map reconstructed online from occupied-
+space samples. These samples are then rendered in three.js using InstancedMesh, 
+a technique that draws thousands of identical
+objects (here cubes) in a single GPU call, enabling smooth real-
+time updates. Voxel colors encode height with a red–green–purple
+gradient from low to high, helping users to quickly interpret the
+environment.
+
+WebXR is a server-based, cross-user, and cross-platform VR
+framework that runs in the browser, transmitting only the visual
+cues required for headset rendering. To minimize the latency with
+the server, we adopt a Netgear NightHawk V2 as a router, providing
+a minimal latency between the robot, the VR server and the headset,
+with a measured ping of only 5 − 8 ms. Communication relies on
+both ROS 2 topics using the FastRTPS middleware and custom
+WebSocket messages.
+
+The flying experiments are conducted in an indoor flying arena
+with a total area of approximately 60 m2. The operator performs VR
+control in a separate sub-area of the same space, ensuring real-time
+interaction with the robot team while maintaining a safe separation
+from the real quadrotor.
+
+---
+
+### Full paper link will be posted soon.
