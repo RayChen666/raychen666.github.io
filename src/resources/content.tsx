@@ -215,9 +215,9 @@ const about: About = {
     title: "Technical skills",
     skills: [
       {
-        title: "Full-Stack Agent Software Development",
+        title: "Full-Stack Software Development",
         description: (
-          <>End-to-end web-based AI software development & deployment.</>
+          <>End-to-end web-based software development & deployment</>
         ),
         tags: [
           {
@@ -237,19 +237,86 @@ const about: About = {
             icon: "fastapi",
           },
           {
+            name: "Docker",
+            icon: "docker",
+          },
+          {
+            name: "MySQL",
+            icon: "sql",
+          },
+        ],
+      },
+      
+      {
+        title: "LLM and Agent",
+        description: (
+          <>LLM prompt engineering with integration to agent design and tool calling</>
+        ),
+        tags: [
+          {
+            name: "Gemini API",
+            icon: "gemini",
+          },
+          {
             name: "LangChain",
             icon: "langchain",
           },
-          {
-            name: "Docker",
-            icon: "docker",
-          }
         ],
       },
+
+      {
+        title: "WebXR Prototyping",
+        description: (
+          <>Proficient prototyping XR user experience for academic research & college education</>
+        ),
+        tags: [
+          {
+            name: "Three.js",
+            icon: "threejs",
+          },
+          {
+            name: "Node.js",
+            icon: "nodejs",
+          }
+        ],
+        // optional: leave the array empty if you don't want to display images
+        images: [],
+      },
+
+      {
+        title: "Machine Learning",
+        description: (
+          <>Project & internship experience in computer vision pipeline</>
+        ),
+        tags: [
+          {
+            name: "TensorFlow",
+            icon: "tensorflow",
+          },
+          {
+            name: "Colab",
+            icon: "colab",
+          },
+          {
+            name: "Mediapipe",
+            icon: "mediapipe",
+          },
+          {
+            name: "OpenCV",
+            icon: "opencv",
+          },
+          {
+            name: "PyTorch",
+            icon: "pytorch",
+          },
+        ],
+        images: [],
+      },
+
       {
         title: "Research",
         description: (
-          <>Begin learning for composing research paper.</>
+          <>Begin learning for composing research paper</>
         ),
         tags: [
           {
@@ -279,71 +346,13 @@ const about: About = {
           */
         ],
       },
-      {
-        title: "WebXR Prototyping",
-        description: (
-          <>Proficient prototyping XR user experience for academic research & college education.</>
-        ),
-        tags: [
-          {
-            name: "JavaScript",
-            icon: "javascript",
-          },
-          {
-            name: "Three.js",
-            icon: "threejs",
-          },
-          {
-            name: "Node.js",
-            icon: "nodejs",
-          }
-        ],
-        // optional: leave the array empty if you don't want to display images
-        images: [],
-      },
-      {
-        title: "Machine Learning",
-        description: (
-          <>Project & internship experience in computer vision pipeline.</>
-        ),
-        tags: [
-          {
-            name: "TensorFlow",
-            icon: "tensorflow",
-          },
-          {
-            name: "Colab",
-            icon: "colab",
-          },
-          {
-            name: "Mediapipe",
-            icon: "mediapipe",
-          },
-          {
-            name: "OpenCV",
-            icon: "opencv",
-          },
-          {
-            name: "Scikit-learn",
-            icon: "scikitlearn",
-          },
-          {
-            name: "PyTorch",
-            icon: "pytorch",
-          },
-        ],
-        images: [],
-      },
+      
       {
         title: "Others",
         description: (
-          <>Perform end-to-end software testing in various platforms.</>
+          <>Perform end-to-end software testing in various platforms</>
         ),
-        tags: [
-          {
-            name: "Gemini API",
-            icon: "gemini",
-          },
+        tags:[
           {
             name: "Linux",
             icon: "linux",
@@ -356,10 +365,7 @@ const about: About = {
             name: "Jira",
             icon: "jira",
           },
-          {
-            name: "MySQL",
-            icon: "sql",
-          },
+
           {
             name: "GitHub",
             icon: "github",
