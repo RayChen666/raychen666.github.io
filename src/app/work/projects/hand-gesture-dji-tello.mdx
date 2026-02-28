@@ -1,9 +1,8 @@
 ---
 title: "HandGestureDJITello - Using Hand Gestures to Control Drone"
 publishedAt: "2024-05-13"
-summary: "Employed pretrained TensorFlow Lite models for gesture recognition and LSTM network for 
-storing hand gesture point history. Used MediaPipe for hand landmark extraction and OpenCV for webcam 
-hand capture and control panel design (compiled work posted on Github)."
+summary: "Designed a real-time computer vision pipeline integrating hand landmark extraction (MediaPipe, OpenCV) with TensorFlow 
+          Lite classification (KeyPoint + LSTM-based Point History models) to enable gesture-driven navigation of a DJI Tello drone."
 images:
   - "/images/projects/project-01/handgestureTello-cover-image.jpg"
   - "/images/projects/project-01/handgestureTello-project-intro.jpg"
@@ -20,9 +19,10 @@ link: "https://github.com/RayChen666/HandGestureDJITello"
 
 ## Overview
 
-In this project, I employed pretrained TensorFlow Lite models for gesture recognition and LSTM network for 
-storing hand gesture point history. Also, I used MediaPipe for hand landmark extraction and OpenCV for webcam 
-hand capture and control panel design.
+A real-time hand gesture recognition system that enables intuitive, screenless control of DJI Tello drones through 
+natural hand movements. Built using MediaPipe for hand tracking, TensorFlow Lite for gesture classification, and 
+OpenCV for the control interface - achieving 30 FPS performance with minimal latency for responsive flight control.
+
 
 ## Problem Addressing
 

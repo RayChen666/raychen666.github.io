@@ -71,6 +71,7 @@ export default function Home() {
             <Heading wrap="balance" 
             variant="display-default-s"
             style={{ fontFamily: "'Cinzel Decorative', serif" }}
+            
             >
               {home.headline}
             </Heading>
@@ -108,9 +109,9 @@ export default function Home() {
       <RevealFx translateY="16" delay={0.6} fillWidth>
         <FeaturedProject
           title="XR-MultiAgent - The first system to explore collaborative agentic spatial intelligence in XR world"
-          description="A real-time XR spatial intelligence system that integrates natural language command input with a 
-          multi-agent backend using FastAPI and LangGraph for agentic collaborative spatial reasoning, enabling dynamic, 
-          spatially coordinated XR interactions with scene objects."
+          description="Architected a real-time XR spatial intelligence system that integrates natural language command 
+          input with a multi-agent backend for collaborative spatial reasoning, enabling dynamic, spatially coordinated 
+          XR interactions with scene objects and immersive world creation."
           images={["/images/projects/project-01/multiagentxr-cover-image.jpg"]}
           videoUrl="/images/projects/project-01/multiagentxr-Demo-Video.mp4"
           projectUrl="/work/multi-agent-xr"
@@ -120,9 +121,9 @@ export default function Home() {
       <RevealFx translateY="16" delay={0.6} fillWidth>
         <FeaturedProject
           title="Flying Together - Human Guided Immersive Shared Control for Aerial Robot Teams in Unknown Environments"
-          description="Collaborated with Agile Robotics And Perception Lab (UC Berkeley) to develop the WebXR user interface, 
-          6-channel WebSocket (including odometry, mpl path, final goal, etc) connecting to ROS2 backend for various sensor 
-          control of swarm (5) drone navigation planner (full paper accepted by IEEE ICRA 2026 conference)."
+          description="Developed a web-based XR user interface and a 6-channel WebSocket communication layer connecting 
+          to the ROS2 backend for multi-sensor control and navigation planning of a drone swarm (3-5), in collaboration 
+          with the Agile Robotics and Perception Lab (work accepted for publication at IEEE ICRA 2026)."
           images={["/images/projects/project-01/xrSwarmDroneControl-cover-image.jpg"]}
           videoUrl="/images/projects/project-01/xrSwarmDroneControl-Demo-Video.mp4"
           projectUrl="/work/xr-swarm-drone-control"
@@ -132,9 +133,9 @@ export default function Home() {
       <RevealFx translateY="16" delay={0.6} fillWidth>
         <FeaturedProject
           title="AR-TelloSimulator - An Augmented Reality Drone Control Simulator"
-          description="Designed and implemented an end-to-end immersive WebXR prototyping system for real-time drone teleoperation, combining AR spatial user 
-          interfaces and live hardware control. Built custom 3D interaction widgets using three.js and Meta SDK, with a Node.js backend enabling 
-          real-time synchronization, multi-client state sharing, and low-latency command streaming to a physical drone (compiled work posted on Github)."
+          description="Designed a full-stack AR drone teleoperation system, combining spatial user interfaces and live hardware control, 
+          enabling real-time synchronization from local server to headset, multi-client state sharing, and low-latency command streaming 
+          to the physical drone."
           images={["/images/projects/project-01/arTelloSimulator-cover-image.jpg"]}
           videoUrl="/images/projects/project-01/arTelloSimulator-Demo-Video.mp4"
           projectUrl="/work/ar-tello-simulator"
@@ -144,9 +145,8 @@ export default function Home() {
       <RevealFx translateY="16" delay={0.6} fillWidth>
         <FeaturedProject
           title="HandGestureDJITello - Using Hand Gestures to Control Drone "
-          description="Employed pretrained TensorFlow Lite models for gesture recognition and LSTM network for 
-          storing hand gesture point history. Used MediaPipe for hand landmark extraction and OpenCV for webcam 
-          hand capture and control panel design (compiled work posted on Github)."
+          description="Designed a real-time computer vision pipeline integrating hand landmark extraction (MediaPipe, OpenCV) with TensorFlow 
+          Lite classification (KeyPoint + LSTM-based Point History models) to enable gesture-driven navigation of a DJI Tello drone."
           images={["/images/projects/project-01/handgestureTello-cover-image.jpg"]}
           videoUrl="/images/projects/project-01/handgestureTello-Demo-Video.mp4"
           projectUrl="/work/hand-gesture-dji-tello"

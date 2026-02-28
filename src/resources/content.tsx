@@ -58,7 +58,7 @@ const social: Social = [
   {
     name: "Resume",
     icon: "file",
-    link: `/resume/resume.pdf`,
+    link: `/resume/raychen-resume-2026.pdf`,
     essential: true,
   },
   
@@ -108,8 +108,8 @@ const about: About = {
     title: "Introduction",
     description: (
       <>
-        Ray is a second-year Master's student in Computer Science at NYU's Courant Institute, 
-        specializing in XR research and development. His work focuses on end-to-end prototyping 
+        Ray is a second-year Master's student in Computer Science at NYU Courant Institute, 
+        specializing in immersive XR system development. His work focuses on end-to-end prototyping 
         of interactive XR experiences, with research interests at the intersection of robot 
         control, HCI, and Mixed Reality.
 
@@ -128,21 +128,20 @@ const about: About = {
         role: "Research Assistant (On-Site)",
         achievements: [
           <>
-            Collaborated with Agile Robotics And Perception Lab (UC Berkeley) to 
-            develop the WebXR user interface, 6-channel WebSocket (including odometry, 
-            mpl path, final goal, etc) connecting to ROS2 backend for various sensor control 
-            of swarm (5) drone navigation planner (full paper accepted by IEEE ICRA 2026 conference).
+            Developed a web-based XR user interface and a 6-channel WebSocket communication layer connecting to 
+            the ROS2 backend for multi-sensor control and navigation planning of a drone swarm (3-5), in collaboration 
+            with the Agile Robotics and Perception Lab (work accepted for publication at IEEE ICRA 2026).
           </>,
           <>
-            Prototyped a real-time AI chatbot integrated into an online meeting platform Bici, enabling 
-            users to manipulate 3D scene animations via natural language commands; implemented structured 
-            prompt engineering with Google Gemini Studio API to generate executable JSON control code. (work 
-            result will be formatted to proposal submitting to NSF National Funding).
+            Prototyped and prompt engineered (Gemini Studio API) a real-time AI chatbot integrating into online 
+            meeting platform Bici, enabling users to use natural language to manipulate 3D scene animations from 
+            generated executable JSON control code. (work result formatted to proposal submitting to NSF National 
+            Funding).
           </>,
           <>
-            Designed and developed interactive WebXR-based VR lecture experiences for NYU graduate Virtual 
-            Reality course (CSCI-GA 3033), using Node.js and a customized 3D computer graphics framework to 
-            enable real-time, immersive interaction in both teaching and learning.
+            Designed interactive Web-based VR lecture experiences for NYU Virtual Reality course (CSCI-GA 3033), 
+            using customized 3D graphics framework to enable real-time, immersive interaction in both teaching & 
+            learning.
           </>
         ],
         images: [
@@ -160,17 +159,19 @@ const about: About = {
       {
         company: "Spatial Front, Inc",
         timeframe: "July 2023 – August 2023 (Washington, D.C.)",
-        role: "Data Engineer Intern in Quality Assurance (Remote)",
+        role: "Quality Assurance Engineer Intern (Remote)",
         achievements: [
           <>
-            Performed Front End API tests in the GIS (Geographic Information System) developing environment 
-            using Postman and Swagger UI. Compiled 20+ test cases and uploaded on Jira Platform to track display 
-            issues of the web-interface of GIS software.
+            Performed front end API tests in the GIS (Geographic Information System) developing environment using Postman 
+            and Swagger UI. Compiled 20+ test cases and uploaded on Jira Platform to track display issues of the web-interface.
           </>,
           <>
-            Utilized K-means Clustering to determine the performance of newly developed features in a company's 
-            database system via Azure Studio and Docker. Discovered 10+ noisy data sets. Consulted with the manager 
-            and updated the code to solve the issue.
+            Determined the performance of newly developed features in the company's database system utilizing K-means 
+            clustering via Azure Studio, with 10+ noisy data sets being discovered.
+          </>,
+          <>
+            Participated in bi-weekly sprint cycles, contributing to feature design discussions, task scoping, peer code reviews, 
+            and release retrospectives within an Agile development environment.
           </>,
         ],
         images: [],
@@ -186,14 +187,13 @@ const about: About = {
             efficiency of clients by 15%.
           </>,
           <>
-            Drafted feasibility reports on the optimization of the CBR (Case-Based Reasoning) and Clustering algorithm 
-            with Dr. Saman Hong to improve the performance of current software, increased the prediction precision of 
-            customer preference by 10%.
+            Optimized the Case-Based Reasoning algorithm with Dr. Saman Hong to improve the performance of existing 
+            SaaS software, increased the prediction precision of wholesale planning by 10%.
           </>,
           <>
             Compiled Java test cases to examine data visualization of the company’s unreleased application “7thLite” on 
-            both PC and mobile platforms, wrote 20+ Bug Reports, and uploaded them to the debugging system to increase 
-            the stability of the new software.
+            both PC and mobile platforms, wrote 20+ Bug Reports, and uploaded them to the internal Red Hat bug reporting 
+            system to increase the stability
           </>,
         ],
         images: [],
@@ -270,7 +270,7 @@ const about: About = {
       },
 
       {
-        title: "WebXR Prototyping",
+        title: "3D Graphics & WebXR Prototyping",
         description: (
           <>Proficient prototyping XR user experience for academic research & college education</>
         ),
@@ -319,19 +319,20 @@ const about: About = {
       },
 
       {
-        title: "Research",
+        title: "Research & Publication",
         description: (
-          <>Begin learning for composing research paper</>
+          <>Academic writing including IEEE ICRA conference paper on XR systems & robotics</>
         ),
         tags: [
-          {
-            name: "Figma",
-            icon: "figma",
-          },
           {
             name: "LaTex",
             icon: "latex",
           },
+          {
+            name: "Figma",
+            icon: "figma",
+          },
+          
         ],
         // optional: leave the array empty if you don't want to display images
         images: [
@@ -353,7 +354,7 @@ const about: About = {
       },
       
       {
-        title: "Others",
+        title: "Platforms",
         description: (
           <>Perform end-to-end software testing in various platforms</>
         ),
