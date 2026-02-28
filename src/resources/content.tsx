@@ -75,12 +75,13 @@ const home: Home = {
     display: true,
     title: (
       <Row gap="12" vertical="center">
-        <strong className="ml-4">Featured Work</strong>{" "}
+        <strong className="ml-4">Selected Work</strong>{" "}
         
       </Row>
     ),
     href: "",
   },
+  
   subline: (
     <></>
   ),
