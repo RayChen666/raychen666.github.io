@@ -70,9 +70,9 @@ const home: Home = {
   label: "Home",
   title: `${person.name}'s Portfolio`,
   description: `Portfolio website showcasing my work as a ${person.role}`,
-  headline: <>Building immersive XR systems that blend AI, robotics, and spatial reasoning</>,
+  headline: <>Building Immersive XR Systems that Blend AI, Robotics, and Spatial Reasoning</>,
   featured: {
-    display: true,
+    display: false,
     title: (
       <Row gap="12" vertical="center">
         <strong className="ml-4">Selected Work</strong>{" "}

@@ -11,7 +11,7 @@ import {
   Meta,
   Line,
 } from "@once-ui-system/core";
-import { home, about, person, baseURL, routes } from "@/resources";
+import { home, about, work, person, baseURL, routes } from "@/resources";
 import { Mailchimp } from "@/components";
 import { Projects } from "@/components/work/Projects";
 import { Posts } from "@/components/blog/Posts";
@@ -69,9 +69,12 @@ export default function Home() {
           )}
           <RevealFx translateY="4" fillWidth horizontal="center" paddingBottom="16">
             <Heading wrap="balance" 
-            variant="display-default-s"
-            style={{ fontFamily: "'Cinzel Decorative', serif" }}
-            
+            variant="display-default-m"
+            style={{ 
+              fontFamily: '"Bitcount Single Ink", sans-serif',
+              fontSize: '2.5rem',
+            }}
+             
             >
               {home.headline}
             </Heading>
@@ -81,31 +84,47 @@ export default function Home() {
               {home.subline}
             </Text>
           </RevealFx>
-          <RevealFx paddingTop="12" delay={0.4} horizontal="center" paddingLeft="12">
-            <Button
-              id="about"
-              data-border="rounded"
-              href={about.path}
-              variant="secondary"
-              size="m"
-              weight="default"
-              arrowIcon
-            >
-              <Row gap="8" vertical="center" paddingRight="4">
-                {about.avatar.display && (
-                  <Avatar
-                    marginRight="8"
-                    style={{ marginLeft: "-0.75rem" }}
-                    src={person.avatar}
-                    size="m"
-                  />
-                )}
-                {about.title}
-              </Row>
-            </Button>
+          <RevealFx paddingTop="12" delay={0.4} horizontal="center">
+            <Row gap="12">
+              <Button
+                id="about"
+                data-border="rounded"
+                href={about.path}
+                variant="secondary"
+                size="m"
+                weight="default"
+                arrowIcon
+              >
+                <Row gap="8" vertical="center" paddingRight="4">
+                  {about.avatar.display && (
+                    <Avatar
+                      marginRight="8"
+                      style={{ marginLeft: "-0.75rem" }}
+                      //src={person.avatar}
+                      src= "/images/og/IMG.jpg"
+                      size="m"
+                    />
+                  )}
+                  About Me
+                </Row>
+              </Button>
+
+              <Button
+                id="work"
+                data-border="rounded"
+                href="/work"
+                variant="secondary"
+                size="m"
+                weight="default"
+                arrowIcon
+              >
+                Selected Work
+              </Button>
+            </Row>
           </RevealFx>
-        </Column>
+          </Column>
       </Column>
+      
       <RevealFx translateY="16" delay={0.6} fillWidth>
         <FeaturedProject
           title="XR-MultiAgent - The first system to explore collaborative agentic spatial intelligence in XR world"
