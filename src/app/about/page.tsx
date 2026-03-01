@@ -117,31 +117,7 @@ export default function About() {
             vertical="center"
             marginBottom="32"
           >
-            {about.calendar.display && (
-              <Row
-                fitWidth
-                border="brand-alpha-medium"
-                background="brand-alpha-weak"
-                radius="full"
-                padding="4"
-                gap="8"
-                marginBottom="m"
-                vertical="center"
-                className={styles.blockAlign}
-                style={{
-                  backdropFilter: "blur(var(--static-space-1))",
-                }}
-              >
-                <Icon paddingLeft="12" name="calendar" onBackground="brand-weak" />
-                <Row paddingX="8">Schedule a call</Row>
-                <IconButton
-                  href={about.calendar.link}
-                  data-border="rounded"
-                  variant="secondary"
-                  icon="chevronRight"
-                />
-              </Row>
-            )}
+            
             <Heading 
               className={styles.textAlign} 
               variant="display-default-xl"
@@ -149,6 +125,7 @@ export default function About() {
             >
               {person.name}
             </Heading>
+            
             <Text
               className={styles.textAlign}
               variant="heading-default-l"
@@ -156,7 +133,9 @@ export default function About() {
             >
               {person.role}
             </Text>
+            
             {social.length > 0 && (
+              
               <Row
                 className={styles.blockAlign}
                 paddingTop="20"
@@ -167,6 +146,41 @@ export default function About() {
                 fitWidth
                 data-border="rounded"
               >
+                {about.calendar.display && (
+                <Row
+                  fitWidth
+                  border="brand-alpha-medium"
+                  background="brand-alpha-weak"
+                  radius="full"
+                  padding="2"
+                  gap="8"
+                  marginBottom="s"
+                  vertical="center"
+                  className={styles.blockAlign}
+                  
+                  style={{
+                    backdropFilter: "blur(var(--static-space-1))",
+                  }}
+                   >
+                  <Icon paddingLeft="8" name="googleMeet" onBackground="brand-weak" size="xs"/>
+                  <Row paddingX="1">
+                    <Text 
+                    variant="label-default-s" 
+                      //onBackground="brand-weak"
+                    >
+                      Book a Meeting
+                    </Text>
+                  </Row>
+                  <IconButton
+                    href={about.calendar.link}
+                    data-border="rounded"
+                    variant="secondary"
+                    icon="chevronRight"
+                    size="s"
+                    style={{ height: "26px", width: "26px", minHeight: "unset" }}
+                  />
+                </Row>
+              )}        
                 {social
                       .filter((item) => item.essential)
                       .map(
@@ -196,8 +210,10 @@ export default function About() {
                       </React.Fragment>
                     ),
                 )}
+                
               </Row>
             )}
+            
           </Column>
 
           {about.intro.display && (

@@ -61,6 +61,14 @@ const social: Social = [
     link: `/resume/raychen-resume-2026.pdf`,
     essential: true,
   },
+  /*
+  {
+    name: "Book a Meeting",
+    icon: "googleMeet",
+    link: "https://calendar.app.google/tUqFNfhkEjy34qLc7",
+    essential: false,
+  },
+  */
   
 ];
 
@@ -100,8 +108,8 @@ const about: About = {
     display: true,
   },
   calendar: {
-    display: false,
-    link: "https://cal.com",
+    display: true,
+    link: "https://calendar.app.google/tUqFNfhkEjy34qLc7",
   },
   intro: {
     display: true,

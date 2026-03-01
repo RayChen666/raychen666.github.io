@@ -53,6 +53,8 @@ import {
   SiScikitlearn,
   SiPytorch,
   SiGooglegemini,
+  SiGooglecalendar,
+  SiGooglemeet,
   SiPostman,
   SiJira,
 } from "react-icons/si";
@@ -107,6 +109,8 @@ export const iconLibrary: Record<string, IconType> = {
   sql: GrMysql ,
   pdf: FaFilePdf,
   file: FaFileAlt,
+  googleCalendar: SiGooglecalendar,
+  googleMeet: SiGooglemeet,
   facebook: FaFacebook,
   pinterest: FaPinterest,
   whatsapp: FaWhatsapp,
