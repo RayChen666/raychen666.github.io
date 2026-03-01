@@ -1,4 +1,6 @@
 import { IconType } from "react-icons";
+import { BsFillFileEarmarkPersonFill } from "react-icons/bs";
+import { AiFillMail} from "react-icons/ai";
 import { 
   FaFilePdf,
   FaFile,
@@ -109,6 +111,8 @@ export const iconLibrary: Record<string, IconType> = {
   sql: GrMysql ,
   pdf: FaFilePdf,
   file: FaFileAlt,
+  resume: BsFillFileEarmarkPersonFill,
+  mail: AiFillMail,
   googleCalendar: SiGooglecalendar,
   googleMeet: SiGooglemeet,
   facebook: FaFacebook,

@@ -52,13 +52,13 @@ const social: Social = [
   
   {
     name: "Email",
-    icon: "email",
+    icon: "mail",
     link: `mailto:${person.email}`,
     essential: true,
   },
   {
     name: "Resume",
-    icon: "file",
+    icon: "resume",
     link: `/resume/raychen-resume-2026.pdf`,
     essential: true,
   },
