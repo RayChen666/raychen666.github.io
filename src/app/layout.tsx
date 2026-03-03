@@ -52,7 +52,13 @@ export default async function RootLayout({
               (function() {
                 try {
                   const root = document.documentElement;
-                  const defaultTheme = 'system';
+                  const configTheme = '${style.theme}';  // Get theme from config
+                  
+                  // Force config theme immediately
+                  root.setAttribute('data-theme', configTheme === 'system' 
+                    ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light')
+                    : configTheme
+                  );
                   
                   // Set defaults from config
                   const config = ${JSON.stringify({
@@ -73,18 +79,28 @@ export default async function RootLayout({
                     root.setAttribute('data-' + key, value);
                   });
                   
-                  // Resolve theme
-                  const resolveTheme = (themeValue) => {
-                    if (!themeValue || themeValue === 'system') {
-                      return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-                    }
-                    return themeValue;
-                  };
-                  
-                  // Apply saved theme
+                  // Check if user has explicitly saved a preference
                   const savedTheme = localStorage.getItem('data-theme');
-                  const resolvedTheme = resolveTheme(savedTheme);
-                  root.setAttribute('data-theme', resolvedTheme);
+                  
+                  // User preference overrides config
+                  if (savedTheme) {
+                    if (savedTheme === 'system') {
+                      const systemTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+                      root.setAttribute('data-theme', systemTheme);
+                    } else {
+                      root.setAttribute('data-theme', savedTheme);
+                    }
+                  } else {
+                    // No saved preference - use config default
+                    if (configTheme === 'system') {
+                      const systemTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+                      root.setAttribute('data-theme', systemTheme);
+                      localStorage.setItem('data-theme', 'system');
+                    } else {
+                      root.setAttribute('data-theme', configTheme);
+                      localStorage.setItem('data-theme', configTheme);
+                    }
+                  }
                   
                   // Apply any saved style overrides
                   const styleKeys = Object.keys(config);
