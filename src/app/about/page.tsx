@@ -131,6 +131,8 @@ export default function About() {
               variant="heading-default-l"
               onBackground="neutral-weak"
             >
+              {"AI Agent Engineer @Enlighten Animation Labs"}
+              <br />
               {person.role}
             </Text>
             

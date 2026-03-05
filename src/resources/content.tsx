@@ -132,6 +132,40 @@ const about: About = {
     title: "Work Experience",
     experiences: [
       {
+        company: "Enlighten Animation Labs",
+        timeframe: "Starting February 2026 (San Francisco, CA)",
+        role: "AI Agent Engineer (Remote)",
+        achievements: [
+          <>
+            Design and refine the scraping (Apify API) pipeline to extract potential targeting user data from various 
+            social media platforms (TikTok, Instagram, etc.) based on customized hash tags, with 4000+ user info 
+            being collected and enriched for marketing strategy optimization.
+          </>,
+          <>
+            Prompt engineer the enrichment agent (Claygent) to automatically generate personalized outreach emails 
+            for potential users based on their profiles collected by the scrapper, with an average of 30% open rate 
+            and 10% response rate.
+          </>,
+          <>
+            Automate the outreach process by integrating scraper, enrichment agent, and outreach 
+            system (Resend API) into a seamless workflow. Improve the pipeline with a 2-stage scrapping strategy: 
+            scale up the scrapper to collect more potential user data based on existing user's profiles for 
+            further marketing.
+          </>
+        ],
+        images: [
+          // optional: leave the array empty if you don't want to display images
+          /*
+          {
+            src: "/images/projects/project-01/cover-01.jpg",
+            alt: "Once UI Project",
+            width: 16,
+            height: 9,
+          },
+          */
+        ],
+      },
+      {
         company: "NYU Future Reality Lab",
         timeframe: "April 2025 - Present (New York City, NY)",
         role: "Research Assistant (On-Site)",
