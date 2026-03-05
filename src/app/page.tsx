@@ -16,6 +16,7 @@ import { Mailchimp } from "@/components";
 import { Projects } from "@/components/work/Projects";
 import { Posts } from "@/components/blog/Posts";
 import { FeaturedProject } from "@/components/FeaturedProject";
+import styles from "@/components/about/about.module.scss";
 
 export async function generateMetadata() {
   return Meta.generate({
@@ -67,23 +68,139 @@ export default function Home() {
               </Badge>
             </RevealFx>
           )}
+
+          {/* Define headline and subline */}
           <RevealFx translateY="4" fillWidth horizontal="center" paddingBottom="16">
-            <Heading wrap="balance" 
-            variant="display-default-m"
-            style={{ 
-              fontFamily: '"Bitcount Single Ink", sans-serif',
-              fontSize: '2.5rem',
-            }}
-             
+            <Heading 
+              wrap="balance" 
+              variant="display-default-m"
+              style={{ 
+                fontFamily: '"Bitcount Single Ink", sans-serif',
+                fontSize: '2.5rem',
+              }}
             >
               {home.headline}
             </Heading>
+
           </RevealFx>
           <RevealFx translateY="8" delay={0.2} fillWidth horizontal="center" paddingBottom="32">
             <Text wrap="balance" onBackground="neutral-weak" variant="heading-default-xl">
               {home.subline}
             </Text>
           </RevealFx>
+
+          {/* Add personal photo, name, tags, keywords and slight self-intro */ }
+          <RevealFx translateY="8" delay={0.3} fillWidth horizontal="center">
+            <Row 
+              gap="24" 
+              vertical="center"
+              horizontal="center"
+              s={{ direction: "column", align: "center" }}
+              paddingX = '64'
+              paddingBottom="24"
+            >
+              {/* Photo */}
+              <figure style={{ 
+                          width: '240px',
+                          height: '240px',
+                          margin: '0',
+                          borderRadius: '50%',
+                          //overflow: 'hidden',
+                          border: 'none',
+                          WebkitMaskImage: 'radial-gradient(circle at center, black 0%, transparent 70%)',
+                          maskImage: 'radial-gradient(circle at center, black 0%, transparent 80%)'
+                        }}>
+                          <img 
+                            src="/images/self_021.png"
+                            //width="100%"
+                            height="100%"
+                            style={{ 
+                              objectFit: 'cover',
+                              display: 'block'
+                            }}
+                          />
+              </figure>
+
+              {/* Text content */}
+              <Column gap="16" align="start" s={{ align: "center" }} horizontal ="center">
+                <Heading 
+                          className={styles.textAlign} 
+                          variant="display-default-xs"
+                          onBackground="neutral-weak"
+                          
+                          style={{ 
+                            fontFamily: '"Press Start 2P", cursive',
+                            
+                            //fontSize: '2.5rem',
+                          }}
+                        >
+                          {person.name}
+                        </Heading>
+                  <Text 
+                    variant="body-default-l" 
+                    className={styles.textAlign} 
+                    onBackground="neutral-weak"
+                    
+                  >
+                    Prototyping the Future of Mixed Reality
+                  </Text>
+      
+                <Row gap="8" 
+                  paddingX = "0"
+                  //vertical = "center"
+                  horizontal="center" 
+                  wrap
+                >
+                  <Badge
+                    background ="brand-alpha-weak"
+                    style={{height: '20px' }}
+                    vertical="center"
+                    textVariant="label-strong-xs"
+                  >
+                    Mixed Reality
+                  </Badge>
+                  
+                  <Badge
+                    background ="brand-alpha-weak"
+                    style={{height: '20px' }}
+                    vertical ="center"
+                    textVariant="label-strong-xs"
+                  >
+                    HCI
+                  </Badge>
+                  <Badge
+                    background ="brand-alpha-weak"
+                    style={{ height: '20px' }}
+                    vertical ="center"
+                    textVariant="label-strong-xs"
+                  >
+                    Robotics
+                  </Badge>
+                  <div style={{ flexBasis: '100%', height: 0 }}></div>
+                   <Badge 
+                    background ="brand-alpha-weak"
+                    style={{height: '20px'}}
+                    vertical="center"
+                  >
+                    <Text variant="body-strong-xs" >
+                    Agent System
+                    </Text>
+                  </Badge>
+                  <Badge
+                    background ="brand-alpha-weak"
+                    style={{ height: '20px' }}
+                    vertical ="center"
+                    textVariant="label-strong-xs"
+                  >
+                    Spatial Intelligence
+                  </Badge>
+                 
+                </Row>
+              </Column>
+            </Row>
+          </RevealFx>
+
+          {/* Define buttones "about me", "selected work" */}
           <RevealFx paddingTop="12" delay={0.4} horizontal="center">
             <Row gap="12">
               <Button

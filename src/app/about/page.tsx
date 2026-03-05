@@ -207,8 +207,10 @@ export default function About() {
                     <Text 
                     variant="label-default-s" 
                       //onBackground="brand-weak"
+                      
                     >
                       Book a Meeting
+                      
                     </Text>
                   </Row>
                   <IconButton
@@ -218,7 +220,7 @@ export default function About() {
                     icon="chevronRight"
                     size="s"
                     
-                    style={{ height: "30px", width: "30px", minHeight: "unset" }}
+                    style={{ height: "30px", width: "30px", minHeight: "unset"}}
                   />
                 </Row>
               )}
