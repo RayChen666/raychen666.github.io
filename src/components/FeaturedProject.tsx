@@ -88,7 +88,7 @@ export function FeaturedProject({
             </Heading>
             
             {subtitle && (
-              <Text variant="body-default-m" onBackground="neutral-weak">
+              <Text variant="body-strong-m" onBackground="neutral-weak">
                 {subtitle}
               </Text>
             )}

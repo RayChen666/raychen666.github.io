@@ -308,7 +308,7 @@ export default function Home() {
       </RevealFx>
       <RevealFx translateY="16" delay={0.6} fillWidth>
         <FeaturedProject
-          keywords="2025 | Distributed System | Drone | AR | HCI"
+          keywords="2025 | AR | HCI | Distributed System | Drone"
           title="AR-TelloSimulator"
           subtitle="An Augmented Reality Drone Control Simulator"
           description="Designed a full-stack AR drone teleoperation system, combining spatial user interfaces and live hardware control, 
@@ -322,7 +322,7 @@ export default function Home() {
       </RevealFx>
       <RevealFx translateY="16" delay={0.6} fillWidth>
         <FeaturedProject
-          keywords="2024 | Computer Vision | Hand Geatures | Drone"
+          keywords="2024 | Computer Vision | Drone | Hand Geatures"
           title="HandGestureDJITello"
           subtitle="Using Hand Gestures to Control Drone"
           description="Designed a real-time computer vision pipeline integrating hand landmark extraction (MediaPipe, OpenCV) with TensorFlow 

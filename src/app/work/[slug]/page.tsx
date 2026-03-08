@@ -20,6 +20,7 @@ import { formatDate } from "@/utils/formatDate";
 import { ScrollToHash, CustomMDX } from "@/components";
 import { Metadata } from "next";
 import { Projects } from "@/components/work/Projects";
+import { Keywords } from "@/components/keywords";
 
 export async function generateStaticParams(): Promise<{ slug: string }[]> {
   const posts = getPosts(["src", "app", "work", "projects"]);
@@ -94,10 +95,11 @@ export default async function Project({
       />
       <Column maxWidth="s" gap="16" horizontal="center" align="center">
         <SmartLink href="/work">
-          <Text variant="display-default-s"
+          <Text variant="display-default-xs"
           //style={{ fontFamily: "'Cinzel Decorative', serif" }}
-          style = {{ fontFamily: "'Zeyada', cursive" }}
-          >Back to Projects
+            style = {{ fontFamily: "'Zeyada', cursive" }}
+            >
+              ☜ Back to Projects
           </Text>
         </SmartLink>
         <Text variant="body-default-s" onBackground="neutral-weak" marginBottom="12">
@@ -108,8 +110,16 @@ export default async function Project({
         >{
           post.metadata.title}
           </Heading>
+          {post.metadata.subtitle && (
+            <Text variant="body-strong-m" onBackground="neutral-weak" align="center">
+              {post.metadata.subtitle}
+            </Text>
+          )}
+          {post.metadata.keywords && (
+            <Keywords keywords={post.metadata.keywords} />
+          )}
       </Column>
-      <Row marginBottom="32" horizontal="center">
+      <Row marginBottom="0" horizontal="center">
         <Row gap="16" vertical="center">
           {post.metadata.team && <AvatarGroup reverse avatars={avatars} size="s" />}
           <Text variant="label-default-m" onBackground="brand-weak">
