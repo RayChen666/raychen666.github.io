@@ -10,6 +10,8 @@ import {
   Schema,
   Meta,
   Line,
+  Icon,
+  IconButton,
 } from "@once-ui-system/core";
 import { home, about, work, person, baseURL, routes } from "@/resources";
 import { Mailchimp } from "@/components";
@@ -17,6 +19,7 @@ import { Projects } from "@/components/work/Projects";
 import { Posts } from "@/components/blog/Posts";
 import { FeaturedProject } from "@/components/FeaturedProject";
 import styles from "@/components/about/about.module.scss";
+import { ScrollButton } from '@/components/ScrollButton';
 
 export async function generateMetadata() {
   return Meta.generate({
@@ -45,8 +48,17 @@ export default function Home() {
           image: `${baseURL}${person.avatar}`,
         }}
       />
-      <Column fillWidth horizontal="center" gap="m">
-        <Column maxWidth="s" horizontal="center" align="center">
+      <Column 
+        fillWidth 
+        horizontal="center" 
+        
+        gap="m"
+        style={{ minHeight: '100vh', justifyContent: 'center',paddingBottom: '250px'  }}
+      >
+        <Column 
+        //maxWidth="s" 
+        horizontal="center" 
+        align="center">
           {home.featured.display && (
             <RevealFx
               fillWidth
@@ -70,6 +82,7 @@ export default function Home() {
           )}
 
           {/* Define headline and subline */}
+          {/*}
           <RevealFx translateY="4" fillWidth horizontal="center" paddingBottom="16">
             <Heading 
               wrap="balance" 
@@ -78,8 +91,11 @@ export default function Home() {
                 fontFamily: '"Bitcount Single Ink", sans-serif',
                 fontSize: '2.5rem',
               }}
-            >
+            > 
+              
+              
               {home.headline}
+              
             </Heading>
 
           </RevealFx>
@@ -88,6 +104,8 @@ export default function Home() {
               {home.subline}
             </Text>
           </RevealFx>
+          */}
+
 
           {/* Add personal photo, name, tags, keywords and slight self-intro */ }
           <RevealFx 
@@ -100,22 +118,22 @@ export default function Home() {
               vertical="center"
               horizontal="center"
               s={{ direction: "column", align: "center" }}
-              paddingX = '64'
+              //paddingX = '64'
               paddingBottom="24"
             >
               {/* Photo */}
               <figure style={{ 
-                          width: '240px',
-                          height: '240px',
+                          width: '440px',
+                          height: '440px',
                           margin: '0',
-                          borderRadius: '50%',
+                          borderRadius: '0%',
                           //overflow: 'hidden',
                           border: 'none',
-                          WebkitMaskImage: 'radial-gradient(circle at center, black 0%, transparent 70%)',
-                          maskImage: 'radial-gradient(circle at center, black 0%, transparent 80%)'
+                          WebkitMaskImage: 'radial-gradient(circle at center, black 0%, transparent 75%)',
+                          maskImage: 'radial-gradient(circle at center, black 0%, transparent 75%)'
                         }}>
                           <img 
-                            src="/images/self_021.png"
+                            src="/images/self_022.png"
                             //width="100%"
                             height="100%"
                             style={{ 
@@ -126,54 +144,70 @@ export default function Home() {
               </figure>
 
               {/* Text content */}
-              <Column gap="16" align="start" s={{ align: "center" }} horizontal ="center">
+              <Column 
+                gap="16" 
+                align="start" 
+                horizontal ="start"
+                className={styles.heroTextColumn}
+                 
+                
+                
+              >
                 <Heading 
                           className={styles.textAlign} 
-                          variant="display-default-xs"
+                          variant="display-default-l"
                           onBackground="neutral-weak"
                           
                           style={{ 
                             fontFamily: '"Press Start 2P", cursive',
                             
-                            //fontSize: '2.5rem',
+                            fontSize: '3rem',
                           }}
                         >
                           {person.name}
                         </Heading>
                   <Text 
-                    variant="body-default-l" 
+                    variant="display-default-m" 
                     className={styles.textAlign} 
-                    onBackground="neutral-weak"
+                    //onBackground="neutral-weak"
+                    style={{ 
+                      fontFamily: '"Bitcount Single", sans-serif',
+                      fontSize: '2rem',
+                      color: 'transparent',
+                      WebkitTextStroke: '0.5px #5ba3c9',
+                    }}
                     
                   >
-                    Prototyping the Future of Mixed Reality
+                    {home.headline}
                   </Text>
       
-                <Row gap="8" 
+                <Row 
+                  gap="8" 
                   paddingX = "0"
-                  //vertical = "center"
+                  vertical = "center"
                   horizontal="center" 
                   wrap
-                >
+                  className={styles.heroTextColumn}
+                > 
+                   <Badge 
+                    onBackground="neutral-weak"
+                    background ="brand-alpha-weak"
+                    style={{height: '20px'}}
+                    vertical="center"
+                    textVariant="label-strong-xs"
+                  >
+                    Agent System
+                  </Badge>
+
                   <Badge
                     onBackground="neutral-weak"
                     background ="brand-alpha-weak"
-                    style={{height: '20px' }}
+                    style={{height: '20px'}}
                     vertical="center"
                     textVariant="label-strong-xs"
                     
                   >
-                    Mixed Reality
-                  </Badge>
-                  
-                  <Badge
-                    onBackground="neutral-weak"
-                    background ="brand-alpha-weak"
-                    style={{height: '20px' }}
-                    vertical ="center"
-                    textVariant="label-strong-xs"
-                  >
-                    HCI
+                    XR
                   </Badge>
                   <Badge
                     onBackground="neutral-weak"
@@ -184,16 +218,18 @@ export default function Home() {
                   >
                     Robotics
                   </Badge>
-                  <div style={{ flexBasis: '100%', height: 0 }}></div>
-                   <Badge 
+                  <Badge
                     onBackground="neutral-weak"
                     background ="brand-alpha-weak"
-                    style={{height: '20px'}}
-                    vertical="center"
+                    style={{height: '20px' }}
+                    vertical ="center"
                     textVariant="label-strong-xs"
                   >
-                    Agent System
+                    HCI
                   </Badge>
+                  
+                  {/*<div style={{ flexBasis: '100%', height: 0 }}></div>*/}
+                  
                   <Badge
                     onBackground="neutral-weak"
                     background ="brand-alpha-weak"
@@ -206,11 +242,15 @@ export default function Home() {
                  
                 </Row>
               </Column>
+              
             </Row>
+            
           </RevealFx>
 
           {/* Define buttones "about me", "selected work" */}
+        {/*
           <RevealFx paddingTop="12" delay={0.4} horizontal="center">
+            
             <Row gap="12">
               <Button
                 id="about"
@@ -238,7 +278,7 @@ export default function Home() {
               <Button
                 id="work"
                 data-border="rounded"
-                href="/work"
+                href="/#selected-work"
                 variant="secondary"
                 size="m"
                 weight="default"
@@ -247,10 +287,48 @@ export default function Home() {
                 Selected Work
               </Button>
             </Row>
+            
+            
+              
+            
           </RevealFx>
+          */}
+          
           </Column>
+          
       </Column>
       
+      
+      <ScrollButton />
+
+
+      <div id="selected-work">
+        <RevealFx 
+        delay={0.6} 
+        translateY="16" 
+        fillWidth 
+        horizontal="center">
+          <Heading 
+          
+          paddingTop="128"
+          variant="display-default-l" 
+          //style={{ fontFamily: "'Zeyada', cursive" }}
+          style={{ 
+            fontFamily: '"Bitcount Single", sans-serif',
+            //fontSize: '2rem',
+            color: 'transparent',
+            WebkitTextStroke: '0.7px #5ba3c9',
+          }}
+          
+          >
+            Selected Work
+          </Heading>
+        </RevealFx>
+    </div>
+      
+
+
+
       <RevealFx translateY="16" delay={0.6} fillWidth>
         <FeaturedProject
           title="XR-MultiAgent - The first system to explore collaborative agentic spatial intelligence in XR world"
@@ -298,6 +376,11 @@ export default function Home() {
           codeUrl="https://github.com/RayChen666/HandGestureDJITello"
         />
       </RevealFx>
+
+      
+
+
+
       {routes["/blog"] && (
         <Column fillWidth gap="24" marginBottom="l">
           <Row fillWidth paddingRight="64">

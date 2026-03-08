@@ -208,8 +208,7 @@ export default function About() {
                   <Row paddingLeft="4">
                     <Text 
                     variant="label-default-s" 
-                      //onBackground="brand-weak"
-                      
+                      //onBackground="brand-weak" 
                     >
                       Book a Meeting
                       

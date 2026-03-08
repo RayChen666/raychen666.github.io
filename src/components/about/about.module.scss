@@ -17,3 +17,20 @@
         align-self: center;
     }
 }
+
+
+
+.heroTextColumn {
+    align-items: flex-start !important;
+  }
+  
+  @media (max-width: 768px) {
+    .heroTextColumn {
+      align-items: center !important;
+      text-align: center !important;
+    }
+    
+    .badgesRow {
+      justify-content: center !important;
+    }
+  }
