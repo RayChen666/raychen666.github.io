@@ -306,7 +306,7 @@ export default function Home() {
       
       <ScrollButton />
 
-
+      {/*
       <div id="selected-work">
         <RevealFx 
         delay={0.6} 
@@ -330,7 +330,26 @@ export default function Home() {
           </Heading>
         </RevealFx>
     </div>
-      
+      */}
+      <div id="selected-work" style={{ scrollMarginTop: '80px' }}>
+        <RevealFx 
+          delay={0.6} 
+          translateY="16" 
+          fillWidth 
+          horizontal="center">
+          <Heading 
+            paddingTop="128"
+            variant="display-default-l" 
+            style={{ 
+              fontFamily: '"Bitcount Single", sans-serif',
+              color: 'transparent',
+              WebkitTextStroke: '0.7px #5ba3c9',
+            }}
+          >
+            Selected Work
+          </Heading>
+        </RevealFx>
+      </div>
 
 
 

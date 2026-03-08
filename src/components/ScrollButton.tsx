@@ -37,7 +37,7 @@ export function ScrollButton() {
   );
 }
   */
- 'use client';
+'use client';
 import { useEffect, useState } from 'react';
 import { IconButton } from '@once-ui-system/core';
 
@@ -51,10 +51,7 @@ export function ScrollButton() {
     const update = () => {
       const el = document.getElementById('selected-work');
       if (!el) return;
-      
-      const reached = window.scrollY >= el.offsetTop - 200;
-      setScrolled(reached);
-      // removed history.replaceState entirely
+      setScrolled(window.scrollY >= el.offsetTop - 200);
     };
 
     update();
@@ -62,12 +59,20 @@ export function ScrollButton() {
     return () => window.removeEventListener('scroll', update);
   }, []);
 
+  const handleClick = () => {
+    if (scrolled) {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else {
+      document.getElementById('selected-work')?.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   if (!mounted) return null;
 
   return (
     <div style={{ position: 'fixed', bottom: '32px', right: '32px', zIndex: 100 }}>
       <IconButton
-        href={scrolled ? '/' : '/#selected-work'}
+        onClick={handleClick}  // ← onClick instead of href
         data-border="rounded"
         variant="secondary"
         icon={scrolled ? 'chevronUp' : 'chevronDown'}
