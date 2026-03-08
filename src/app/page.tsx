@@ -53,7 +53,12 @@ export default function Home() {
         horizontal="center" 
         
         gap="m"
-        style={{ minHeight: '100vh', justifyContent: 'center',paddingBottom: '250px'  }}
+        style={{ 
+          minHeight: '100vh', 
+          justifyContent: 'center',
+          overflowX: 'hidden',
+          paddingBottom: '250px'  
+        }}
       >
         <Column 
         //maxWidth="s" 
@@ -123,8 +128,8 @@ export default function Home() {
             >
               {/* Photo */}
               <figure style={{ 
-                          width: '440px',
-                          height: '440px',
+                          width: 'min(440px, 80vw)',   // ← shrinks on mobile
+                          height: 'min(440px, 80vw)',
                           margin: '0',
                           borderRadius: '0%',
                           //overflow: 'hidden',
