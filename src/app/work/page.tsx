@@ -28,15 +28,18 @@ export default function Work() {
           image: `${baseURL}${person.avatar}`,
         }}
       />
-      <Heading 
-        marginBottom="l" 
-        variant="display-default-xl" 
-        align="center"
-        // style={{ fontFamily: "'Cinzel Decorative', serif" }}
-        style = {{ fontFamily: "'Zeyada', cursive" }}
-      >
-        {work.title}
-      </Heading>
+      <Column gap="8">
+        <Heading 
+          marginBottom="l" 
+          variant="display-default-xl" 
+          align="center"
+          // style={{ fontFamily: "'Cinzel Decorative', serif" }}
+          style = {{ fontFamily: "'Zeyada', cursive" }}
+        >
+          {work.title}
+        </Heading>
+        
+      </Column>
       <Projects />
     </Column>
   );

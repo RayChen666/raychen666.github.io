@@ -10,6 +10,8 @@ import {
   Text,
 } from "@once-ui-system/core";
 
+import { Keywords } from "@/components/keywords";
+
 interface ProjectCardProps {
   href: string;
   priority?: boolean;
@@ -19,6 +21,8 @@ interface ProjectCardProps {
   description: string;
   avatars: { src: string }[];
   link: string;
+  keywords?: string;
+  subtitle?: string;
 }
 
 export const ProjectCard: React.FC<ProjectCardProps> = ({
@@ -29,6 +33,8 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
   description,
   avatars,
   link,
+  keywords,
+  subtitle,
 }) => {
   return (
     <Column fillWidth gap="m">
@@ -49,9 +55,17 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
       >
         {title && (
           <Flex flex={5}>
+            <Column gap="8">
+            {keywords && <Keywords keywords={keywords} />}
             <Heading as="h2" wrap="balance" variant="heading-strong-xl">
               {title}
             </Heading>
+            {subtitle && (
+              <Text variant="body-default-m" onBackground="neutral-weak">
+                {subtitle}
+              </Text>
+            )}
+            </Column>
           </Flex>
         )}
         {(avatars?.length > 0 || description?.trim() || content?.trim()) && (

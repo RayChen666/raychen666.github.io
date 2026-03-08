@@ -12,7 +12,9 @@ import {
 
 interface FeaturedProjectProps {
   title: string;
+  subtitle?: string;
   description: string;
+  keywords: string;
   images: string[];
   videoUrl: string;
   projectUrl: string;
@@ -21,6 +23,8 @@ interface FeaturedProjectProps {
 
 export function FeaturedProject({ 
   title, 
+  subtitle,
+  keywords,
   description, 
   images,
   videoUrl,
@@ -66,11 +70,33 @@ export function FeaturedProject({
         gap="l"
         s={{ direction: "column" }}
         >
-        <Flex flex={7}>  {/* Title - keep as is */}
+        <Flex flex={7}>
+          <Column gap="8">
+            {keywords && (
+              <Text variant="body-default-s" onBackground="neutral-weak" style={{ letterSpacing: '0.05em' }}>
+                {keywords.split('|').map((k, i, arr) => (
+                  <span key={i}>
+                    {k.trim()}
+                    {i < arr.length - 1 && <span style={{ margin: '0 12px', opacity: 0.4 }}>|</span>}
+                  </span>
+                ))}
+              </Text>
+            )}
+            
             <Heading as="h2" wrap="balance" variant="heading-strong-xl">
-            {title}
+              {title}
             </Heading>
+            
+            {subtitle && (
+              <Text variant="body-default-m" onBackground="neutral-weak">
+                {subtitle}
+              </Text>
+            )}
+            
+          </Column>
         </Flex>
+        
+
 
         <Column flex={7} gap="16">
           <Text wrap="balance" variant="body-default-s" onBackground="neutral-weak">

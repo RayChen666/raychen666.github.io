@@ -233,7 +233,7 @@ export default function Home() {
                     HCI
                   </Badge>
                   
-                  {/*<div style={{ flexBasis: '100%', height: 0 }}></div>*/}
+                  
                   
                   <Badge
                     onBackground="neutral-weak"
@@ -248,89 +248,14 @@ export default function Home() {
                 </Row>
               </Column>
               
-            </Row>
-            
-          </RevealFx>
-
-          {/* Define buttones "about me", "selected work" */}
-        {/*
-          <RevealFx paddingTop="12" delay={0.4} horizontal="center">
-            
-            <Row gap="12">
-              <Button
-                id="about"
-                data-border="rounded"
-                href={about.path}
-                variant="secondary"
-                size="m"
-                weight="default"
-                arrowIcon
-              >
-                <Row gap="8" vertical="center" paddingRight="4">
-                  {about.avatar.display && (
-                    <Avatar
-                      marginRight="8"
-                      style={{ marginLeft: "-0.75rem" }}
-                      //src={person.avatar}
-                      src= "/images/og/IMG_01.jpg"
-                      size="m"
-                    />
-                  )}
-                  About Me
-                </Row>
-              </Button>
-
-              <Button
-                id="work"
-                data-border="rounded"
-                href="/#selected-work"
-                variant="secondary"
-                size="m"
-                weight="default"
-                arrowIcon
-              >
-                Selected Work
-              </Button>
-            </Row>
-            
-            
-              
-            
-          </RevealFx>
-          */}
-          
-          </Column>
-          
+            </Row>          
+          </RevealFx>          
+          </Column>        
       </Column>
       
       
       <ScrollButton />
 
-      {/*
-      <div id="selected-work">
-        <RevealFx 
-        delay={0.6} 
-        translateY="16" 
-        fillWidth 
-        horizontal="center">
-          <Heading 
-          
-          paddingTop="128"
-          variant="display-default-l" 
-          //style={{ fontFamily: "'Zeyada', cursive" }}
-          style={{ 
-            fontFamily: '"Bitcount Single", sans-serif',
-            //fontSize: '2rem',
-            color: 'transparent',
-            WebkitTextStroke: '0.7px #5ba3c9',
-          }}
-          
-          >
-            Selected Work
-          </Heading>
-        </RevealFx>
-    </div>
-      */}
       <div id="selected-work" style={{ scrollMarginTop: '80px' }}>
         <RevealFx 
           delay={0.6} 
@@ -355,10 +280,12 @@ export default function Home() {
 
       <RevealFx translateY="16" delay={0.6} fillWidth>
         <FeaturedProject
-          title="XR-MultiAgent - The first system to explore collaborative agentic spatial intelligence in XR world"
-          description="Architected a real-time XR spatial intelligence system that integrates natural language command 
-          input with a multi-agent backend for collaborative spatial reasoning, enabling dynamic, spatially coordinated 
-          XR interactions with scene objects and immersive world creation."
+          keywords="2026 | Multi-Agent System | HCI | VR"
+          title="XR-MultiAgent"
+          subtitle="The first system to explore collaborative agentic spatial intelligence in XR world"
+          description="Architected a real-time XR spatial intelligence system that integrates natural 
+          language command input with a multi-agent backend for collaborative spatial reasoning, enabling 
+          dynamic, spatially coordinated XR interactions with scene objects and immersive world creation."
           images={["/images/projects/project-01/multiagentxr-cover-image.jpg"]}
           videoUrl="/images/projects/project-01/multiagentxr-Demo-Video.mp4"
           projectUrl="/work/multi-agent-xr"
@@ -367,7 +294,9 @@ export default function Home() {
       </RevealFx>
       <RevealFx translateY="16" delay={0.6} fillWidth>
         <FeaturedProject
-          title="Flying Together - Human Guided Immersive Shared Control for Aerial Robot Teams in Unknown Environments"
+          keywords="2025 | Robotics | Swarm Drones | XR | HCI"
+          title="Flying Together"
+          subtitle="Human Guided Immersive Shared Control for Aerial Robot Teams in Unknown Environments"
           description="Developed a web-based XR user interface and a 6-channel WebSocket communication layer connecting 
           to the ROS2 backend for multi-sensor control and navigation planning of a drone swarm (3-5), in collaboration 
           with the Agile Robotics and Perception Lab (work accepted for publication at IEEE ICRA 2026)."
@@ -379,7 +308,9 @@ export default function Home() {
       </RevealFx>
       <RevealFx translateY="16" delay={0.6} fillWidth>
         <FeaturedProject
-          title="AR-TelloSimulator - An Augmented Reality Drone Control Simulator"
+          keywords="2025 | Distributed System | Drone | AR | HCI"
+          title="AR-TelloSimulator"
+          subtitle="An Augmented Reality Drone Control Simulator"
           description="Designed a full-stack AR drone teleoperation system, combining spatial user interfaces and live hardware control, 
           enabling real-time synchronization from local server to headset, multi-client state sharing, and low-latency command streaming 
           to the physical drone."
@@ -391,7 +322,9 @@ export default function Home() {
       </RevealFx>
       <RevealFx translateY="16" delay={0.6} fillWidth>
         <FeaturedProject
-          title="HandGestureDJITello - Using Hand Gestures to Control Drone "
+          keywords="2024 | Computer Vision | Hand Geatures | Drone"
+          title="HandGestureDJITello"
+          subtitle="Using Hand Gestures to Control Drone"
           description="Designed a real-time computer vision pipeline integrating hand landmark extraction (MediaPipe, OpenCV) with TensorFlow 
           Lite classification (KeyPoint + LSTM-based Point History models) to enable gesture-driven navigation of a DJI Tello drone."
           images={["/images/projects/project-01/handgestureTello-cover-image.jpg"]}
