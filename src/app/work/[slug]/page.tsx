@@ -96,7 +96,6 @@ export default async function Project({
       <Column maxWidth="s" gap="16" horizontal="center" align="center">
         <SmartLink href="/work">
           <Text variant="display-default-xs"
-          //style={{ fontFamily: "'Cinzel Decorative', serif" }}
             style = {{ fontFamily: "'Zeyada', cursive" }}
             >
               ☜ Back to Projects

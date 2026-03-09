@@ -67,7 +67,7 @@ const socialPlatforms: Record<string, SocialPlatform> = {
   },
   email: {
     name: "email",
-    icon: "email",
+    icon: "mail",
     label: "Email",
     generateUrl: (title, url) => 
       `mailto:?subject=${encodeURIComponent(title)}&body=${encodeURIComponent(`Check out this post: ${url}`)}`,
