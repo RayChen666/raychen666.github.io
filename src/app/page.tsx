@@ -269,10 +269,9 @@ export default function Home() {
         <FeaturedProject
           keywords="2026 | Multi-Agent System | HCI | VR"
           title="XR-MultiAgent"
-          subtitle="The first system to explore collaborative agentic spatial intelligence in XR world"
-          description="Architected a real-time XR spatial intelligence system that integrates natural 
-          language command input with a multi-agent backend for collaborative spatial reasoning, enabling 
-          dynamic, spatially coordinated XR interactions with scene objects and immersive world creation."
+          //subtitle="The first system to explore collaborative agentic spatial intelligence in XR world"
+          description="A real-time multi-agent system that translates natural language into spatially 
+          coordinated XR scene creation and manipulation."
           images={["/images/projects/project-01/multiagentxr-cover-image.jpg"]}
           videoUrl="/images/projects/project-01/multiagentxr-Demo-Video.mp4"
           projectUrl="/work/multi-agent-xr"
@@ -281,12 +280,11 @@ export default function Home() {
       </RevealFx>
       <RevealFx translateY="16" delay={0.6} fillWidth>
         <FeaturedProject
-          keywords="2025 | Robotics | Swarm Drones | XR | HCI"
+          keywords="2025 | Robotics | Swarm Drones | XR"
           title="Flying Together"
-          subtitle="Human Guided Immersive Shared Control for Aerial Robot Teams in Unknown Environments"
-          description="Developed a web-based XR user interface and a 6-channel WebSocket communication layer connecting 
-          to the ROS2 backend for multi-sensor control and navigation planning of a drone swarm (3-5), in collaboration 
-          with the Agile Robotics and Perception Lab (work accepted for publication at IEEE ICRA 2026)."
+          //subtitle="Human Guided Immersive Shared Control for Aerial Robot Teams in Unknown Environments"
+          description="Built a WebXR interface and WebSocket communication layer for multi-sensor drone 
+          swarm control, published at IEEE ICRA 2026."
           images={["/images/projects/project-01/xrSwarmDroneControl-cover-image.jpg"]}
           videoUrl="/images/projects/project-01/xrSwarmDroneControl-Demo-Video.mp4"
           projectUrl="/work/xr-swarm-drone-control"
@@ -295,12 +293,10 @@ export default function Home() {
       </RevealFx>
       <RevealFx translateY="16" delay={0.6} fillWidth>
         <FeaturedProject
-          keywords="2025 | AR | HCI | Distributed System | Drone"
+          keywords="2025 | AR | Distributed System | Drone"
           title="AR-TelloSimulator"
-          subtitle="An Augmented Reality Drone Control Simulator"
-          description="Designed a full-stack AR drone teleoperation system, combining spatial user interfaces and live hardware control, 
-          enabling real-time synchronization from local server to headset, multi-client state sharing, and low-latency command streaming 
-          to the physical drone."
+          //subtitle="An Augmented Reality Drone Control Simulator"
+          description= "A full-stack AR drone teleoperation system enabling real-time spatial control and low-latency streaming to a physical drone."
           images={["/images/projects/project-01/arTelloSimulator-cover-image.jpg"]}
           videoUrl="/images/projects/project-01/arTelloSimulator-Demo-Video.mp4"
           projectUrl="/work/ar-tello-simulator"
@@ -309,11 +305,11 @@ export default function Home() {
       </RevealFx>
       <RevealFx translateY="16" delay={0.6} fillWidth>
         <FeaturedProject
-          keywords="2024 | Computer Vision | Drone | Hand Geatures"
+          keywords="2024 | CV | Drone | Hand Geatures"
           title="HandGestureDJITello"
-          subtitle="Using Hand Gestures to Control Drone"
-          description="Designed a real-time computer vision pipeline integrating hand landmark extraction (MediaPipe, OpenCV) with TensorFlow 
-          Lite classification (KeyPoint + LSTM-based Point History models) to enable gesture-driven navigation of a DJI Tello drone."
+          // subtitle="Using Hand Gestures to Control Drone"
+          description="A real-time computer vision pipeline enabling gesture-based control of a DJI Tello 
+          drone using hand tracking with webcam."
           images={["/images/projects/project-01/handgestureTello-cover-image.jpg"]}
           videoUrl="/images/projects/project-01/handgestureTello-Demo-Video.mp4"
           projectUrl="/work/hand-gesture-dji-tello"
