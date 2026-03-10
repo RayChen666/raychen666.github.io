@@ -182,6 +182,7 @@ export default function About() {
                 
               </Row>
             )}
+            {/*
              {about.calendar.display && (
                 <Row
                   fitWidth
@@ -225,7 +226,76 @@ export default function About() {
                   />
                 </Row>
               )}
-            
+              */}
+              {about.calendar.display && (
+              <>
+                {/* Desktop: small pill button */}
+                <Row s={{ hide: true }}
+                  fitWidth
+                  border="brand-alpha-medium"
+                  background="brand-alpha-weak"
+                  radius="full"
+                  padding="0"
+                  gap="4"
+                  marginBottom="m"
+                  vertical="center"
+                  className={styles.blockAlign}
+                  style={{ backdropFilter: "blur(var(--static-space-1))" }}
+                >
+                  <Icon paddingLeft="8" name="googleMeet" size="xs" />
+                  <Row paddingLeft="4">
+                    <Text variant="label-default-s">Book a Meeting</Text>
+                  </Row>
+                  <IconButton
+                    href={about.calendar.link}
+                    data-border="rounded"
+                    variant="secondary"
+                    icon="chevronRight"
+                    size="s"
+                    style={{ height: "30px", width: "30px", minHeight: "unset" }}
+                  />
+                </Row>
+
+                {/* Mobile: full button but same height as size="l" icon buttons */}
+                <Row hide s={{ hide: false }} marginBottom="m" className={styles.blockAlign}>
+                  <Row
+                    fitWidth
+                    border="brand-alpha-medium"
+                    background="brand-alpha-weak"
+                    radius="full"
+                    paddingX="12"
+                    paddingRight="0"
+                    gap="4"
+                    vertical="center"
+                    style={{ 
+                      backdropFilter: "blur(var(--static-space-1))",
+                      height: "var(--static-space-40)",  // ← match size="l" height
+                    }}
+                  >
+                    <Icon name="googleMeet" size="s" paddingLeft="0"/>
+                    <Row paddingLeft="4" paddingRight="4">
+                      <Text variant="label-default-s" >Book a Meeting</Text>
+                    </Row>
+                    <IconButton
+                      href={about.calendar.link}
+                      data-border="rounded"
+                      variant="secondary"
+                      icon="chevronRight"
+                      size="s"
+                      
+                      style={{ 
+                        height: "36px", 
+                        width: "36px", 
+                        minHeight: "unset",
+                        //marginLeft: "auto" 
+                        
+                      }}
+                      
+                    />
+                  </Row>
+                </Row>
+              </>
+            )}
           </Column>
 
           {about.intro.display && (

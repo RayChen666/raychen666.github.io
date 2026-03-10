@@ -30,8 +30,8 @@ export function LineShadowText({
         aria-hidden="true"
         style={{
           position: "absolute",
-          top: "6px",
-          left: "6px",
+          top: "0.12em",
+          left: "0.12em",
           font: "inherit",        // ← key fix: copies ALL font properties
           whiteSpace: "pre",
           backgroundImage: `repeating-linear-gradient(

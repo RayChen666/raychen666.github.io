@@ -88,31 +88,6 @@ export default function Home() {
             </RevealFx>
           )}
 
-          {/* Define headline and subline */}
-          {/*}
-          <RevealFx translateY="4" fillWidth horizontal="center" paddingBottom="16">
-            <Heading 
-              wrap="balance" 
-              variant="display-default-m"
-              style={{ 
-                fontFamily: '"Bitcount Single Ink", sans-serif',
-                fontSize: '2.5rem',
-              }}
-            > 
-              
-              
-              {home.headline}
-              
-            </Heading>
-
-          </RevealFx>
-          <RevealFx translateY="8" delay={0.2} fillWidth horizontal="center" paddingBottom="32">
-            <Text wrap="balance" onBackground="neutral-weak" variant="heading-default-xl">
-              {home.subline}
-            </Text>
-          </RevealFx>
-          */}
-
 
           {/* Add personal photo, name, tags, keywords and slight self-intro */ }
           <RevealFx 
@@ -128,60 +103,36 @@ export default function Home() {
               //paddingX = '64'
               paddingBottom="24"
             >
-              {/* Photo */}
-              {/*
-              <figure style={{ 
-                          width: 'min(440px, 80vw)',   // ← shrinks on mobile
-                          height: 'min(440px, 80vw)',
-                          margin: '0',
-                          borderRadius: '0%',
-                          //overflow: 'hidden',
-                          border: 'none',
-                          WebkitMaskImage: 'radial-gradient(circle at center, black 0%, transparent 75%)',
-                          maskImage: 'radial-gradient(circle at center, black 0%, transparent 75%)'
-                        }}>
-                          
-                          <img 
-                            src="/images/self_022.png"
-                            //width="100%"
-                            height="100%"
-                            style={{ 
-                              objectFit: 'cover',
-                              display: 'block',
-                            }}
-                          />
-                 
-              </figure>
-                */}
+              
               <div style={{ position: "relative", width: 'min(440px, 80vw)', height: 'min(440px, 80vw)' }}>
   
-  {/* Ripple sits outside figure so mask doesn't clip it */}
-  <Ripple 
-  mainCircleSize={50} 
-  numCircles={6} 
-  color="#5ba3c9" 
-  mainCircleOpacity={0.24}
-  
-  />
+                {/* Ripple sits outside figure so mask doesn't clip it */}
+                <Ripple 
+                mainCircleSize={50} 
+                numCircles={6} 
+                color="#5ba3c9" 
+                mainCircleOpacity={0.24}
+                
+                />
 
-  {/* Photo with mask */}
-  <figure style={{ 
-    position: "relative",
-    zIndex: 1,
-    width: '100%',
-    height: '100%',
-    margin: '0',
-    border: 'none',
-    WebkitMaskImage: 'radial-gradient(circle at center, black 0%, transparent 75%)',
-    maskImage: 'radial-gradient(circle at center, black 0%, transparent 75%)'
-  }}>
-    <img 
-      src="/images/self_022.png"
-      height="100%"
-      style={{ objectFit: 'cover', display: 'block' }}
-    />
-  </figure>
-</div>
+                {/* Photo with mask */}
+                <figure style={{ 
+                  position: "relative",
+                  zIndex: 1,
+                  width: '100%',
+                  height: '100%',
+                  margin: '0',
+                  border: 'none',
+                  WebkitMaskImage: 'radial-gradient(circle at center, black 0%, transparent 75%)',
+                  maskImage: 'radial-gradient(circle at center, black 0%, transparent 75%)'
+                }}>
+                  <img 
+                    src="/images/self_022.png"
+                    height="100%"
+                    style={{ objectFit: 'cover', display: 'block' }}
+                  />
+                </figure>
+              </div>
               {/* Text content */}
               <Column 
                 gap="16" 
