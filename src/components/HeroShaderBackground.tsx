@@ -11,7 +11,7 @@ export function HeroShaderBackground() {
     }}>
       <SynthwaveCanyonShader 
         speed={0.5} 
-        opacity={0.35}
+        opacity={0.25}
         flightHeight={1.0}
         terrainDepth={24.0}
       />

@@ -23,6 +23,7 @@ import { ScrollButton } from '@/components/ScrollButton';
 import { LineShadowText } from "@/components/LineShadowText"
 import { Ripple } from "@/components/Ripple"
 import { HeroShaderBackground } from "@/components/HeroShaderBackground"
+import { AuroraText } from "@/components/AuroraText"
 
 export async function generateMetadata() {
   return Meta.generate({
@@ -174,11 +175,22 @@ export default function Home() {
                       fontFamily: '"Bitcount Single", sans-serif',
                       fontSize: 'clamp(1.7rem, 4vw, 2rem)',
                       //color: 'transparent',
-                      WebkitTextStroke: '0.5px #5ba3c9',
+                      //WebkitTextStroke: '0.5px #5ba3c9',
                     }}
                     
                   >
+                    <AuroraText
+                      //colors={["#FF0080", "#7928CA", "#0070F3", "#38bdf8"]}
+                      colors={["#0ea5e9", "#38bdf8", "#5ba3c9", "#93c5fd"]}
+                      speed={1}
+                      style={{
+                        fontFamily: '"Bitcount Single", sans-serif',
+                        fontSize: 'clamp(1.7rem, 4vw, 2rem)',
+                        WebkitTextStroke: '0.2px #000000'
+                      }}
+                    >
                     {home.headline}
+                    </AuroraText>
                   </Text>
       
                 <Row 
