@@ -20,7 +20,7 @@ export function HeroShaderBackground() {
       pointerEvents: 'none',
     }}>
       <SynthwaveCanyonShader 
-        speed={0.5} 
+        speed={0.3} 
         opacity={0.3}
         flightHeight={1.0}
         terrainDepth={24.0}

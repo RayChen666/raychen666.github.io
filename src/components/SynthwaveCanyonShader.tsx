@@ -197,7 +197,7 @@ vec3 color(vec3 ww, vec3 uu, vec3 vv, vec3 ro, vec2 p) {
   vec3 skyCol = skyColor(ro, rd);
   vec4 acol = vec4(0.0);
   const float cutOff = 0.95;
-  for (int i = 1; i <= 24; ++i) {
+  for (int i = 1; i <= 16; ++i) {
     if (float(i) > furthest) break;
     float pz = planeDist*nz + planeDist*float(i);
     float pd = (pz - ro.z)/rd.z;
@@ -268,8 +268,8 @@ export function SynthwaveCanyonShader({
     if (!gl) return
 
     const resize = () => {
-      canvas.width = canvas.offsetWidth
-      canvas.height = canvas.offsetHeight
+      canvas.width = canvas.offsetWidth*0.5
+      canvas.height = canvas.offsetHeight*0.5
       gl.viewport(0, 0, canvas.width, canvas.height)
     }
     resize()
