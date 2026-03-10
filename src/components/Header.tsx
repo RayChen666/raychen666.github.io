@@ -2,7 +2,7 @@
 
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
-
+import { ShineBorder } from "@/components/ShineBorder";
 import { Fade, Flex, Line, Row, ToggleButton } from "@once-ui-system/core";
 
 import { routes, display, person, about, blog, work, gallery } from "@/resources";
@@ -77,7 +77,8 @@ export const Header = () => {
         </Row>
         <Row fillWidth horizontal="center">
           <Row
-            background="page"
+            //background="page"
+            //background="neutral-weak"  
             border="neutral-alpha-weak"
             radius="m-4"
             shadow="l"
@@ -85,6 +86,11 @@ export const Header = () => {
             horizontal="center"
             zIndex={1}
           >
+            <ShineBorder
+              //shineColor={["#5ba3c9", "#ffffff", "#5ba3c9"]}
+              duration={6}
+              borderWidth={0.6}
+            />
             <Row gap="4" vertical="center" textVariant="body-default-s" suppressHydrationWarning>
               {routes["/"] && (
                 <ToggleButton prefixIcon="home" href="/" selected={pathname === "/"} />

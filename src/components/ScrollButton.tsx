@@ -1,6 +1,9 @@
 'use client';
 import { useEffect, useState } from 'react';
 import { IconButton } from '@once-ui-system/core';
+import { ShineBorder } from '@/components/ShineBorder';
+
+
 
 export function ScrollButton() {
   const [scrolled, setScrolled] = useState(false);
@@ -31,14 +34,32 @@ export function ScrollButton() {
   if (!mounted) return null;
 
   return (
-    <div style={{ position: 'fixed', bottom: '32px', right: '32px', zIndex: 100 }}>
+    <div style={{ 
+      position: 'fixed', 
+      bottom: '32px', 
+      right: '32px', 
+      zIndex: 100,
+      //borderRadius: '50%', 
+      borderRadius: 'var(--radius-full)',
+      width: 'var(--static-space-40)', 
+      height: 'var(--static-space-40)',
+      //overflow: 'hidden',
+    }}>
+      <ShineBorder
+        //shineColor={["#5ba3c9", "#ffffff", "#5ba3c9"]}
+        duration={6}
+        borderWidth={0.6}
+      />
       <IconButton
         onClick={handleClick}  // ← onClick instead of href
         data-border="rounded"
         variant="secondary"
         icon={scrolled ? 'chevronUp' : 'chevronDown'}
         size="s"
-        style={{ height: '40px', width: '40px', minHeight: 'unset' }}
+        style={{ height: 'var(--static-space-40)', 
+          width: 'var(--static-space-40)', 
+          minHeight: 'unset',
+          minWidth: 'unset', }}
       />
     </div>
   );

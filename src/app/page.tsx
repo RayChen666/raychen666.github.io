@@ -200,7 +200,7 @@ export default function Home() {
                           style={{ 
                             fontFamily: '"Press Start 2P", cursive',
                             
-                            fontSize: '3rem',
+                            fontSize: 'clamp(2.5rem, 4vw, 3rem)'
                           }}
                         > 
                         
@@ -215,7 +215,7 @@ export default function Home() {
                     //onBackground="neutral-weak"
                     style={{ 
                       fontFamily: '"Bitcount Single", sans-serif',
-                      fontSize: '2rem',
+                      fontSize: 'clamp(1.7rem, 4vw, 2rem)',
                       color: 'transparent',
                       WebkitTextStroke: '0.5px #5ba3c9',
                     }}
@@ -295,14 +295,14 @@ export default function Home() {
           horizontal="center">
           <Heading 
             paddingTop="16"
-            variant="display-default-s" 
+            //variant="display-default-s" 
             //style={{ fontFamily: '"Bitcount Single", sans-serif',color: 'transparent', WebkitTextStroke: '0.7px #5ba3c9',}}
             
             onBackground="neutral-weak"
                           
             style={{ 
               fontFamily: '"Press Start 2P", cursive',           
-              //fontSize: '3rem',
+              fontSize: 'clamp(1.5rem, 4vw,  2.5rem)',
             }}
           >
           <LineShadowText shadowColor="#5ba3c9" as="span">
