@@ -140,7 +140,7 @@ vec4 plane(vec3 ro, vec3 rd, vec3 pp, vec3 off, float aa, float n) {
   float he = height(vec2(p.x, pp.z));
   float d = p.y - he;
   float t = smoothstep(aa, -aa, d);
-  vec3 hsv = vec3(fract(0.55 + 0.08*sin(0.6*pp.z)), 0.6, smoothstep(aa, -aa, abs(d)-aa));
+  vec3 hsv = vec3(fract(0.58 + 0.08*sin(0.6*pp.z)), 0.4, smoothstep(aa, -aa, abs(d)-aa));
   float g = exp(-90.*max(abs(d), 0.0));
   hsv.z += g;
   hsv.z += (he*he-pp.y-0.125)*0.5;
