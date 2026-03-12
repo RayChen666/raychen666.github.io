@@ -169,7 +169,7 @@ vec3 skyColor(vec3 ro, vec3 rd) {
   float aa = 2.0/iResolution.y;
   vec2 p = rd.xy*2.0;
   p.y -= 0.25;
-  vec3 sunCol = mix(vec3(0.0, 0.85, 1.0), vec3(0.95, 1.0, 1.0), 
+  vec3 sunCol = mix(vec3(0.85, 1.0, 1.0), vec3(0.0, 0.45, 1.0),
   clamp((0.85 - p.y)*0.75, 0.0, 1.0));
   vec3 glareCol = sqrt(sunCol);
   float ss = smoothstep(-1.05, 0.0, p.y);
