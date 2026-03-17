@@ -165,7 +165,7 @@ export default async function Blog({ params }: { params: Promise<{ slug: string 
             //marginBottom="24"
             style = {{ fontFamily: "'Zeyada', cursive" }}
             >
-              Recent posts
+              Recent Posts
             </Text>
             <Posts exclude={[post.slug]} range={[1, 2]} columns="2" thumbnail direction="column" />
           </Column>

@@ -48,7 +48,7 @@ export default function Blog() {
           marginLeft="l"
           style = {{ fontFamily: "'Zeyada', cursive" }}
         >
-          Earlier posts
+          Earlier Posts
         </Heading>
         <Posts range={[4]} columns="2" />
       </Column>
