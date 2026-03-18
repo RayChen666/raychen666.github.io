@@ -8,6 +8,7 @@ import {
   Heading,
   SmartLink,
   Text,
+  Card,
 } from "@once-ui-system/core";
 
 import { Keywords } from "@/components/keywords";
@@ -40,6 +41,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
     <Column fillWidth gap="m">
       <Carousel
         sizes="(max-width: 960px) 100vw, 960px"
+        radius="l-4"
         items={images.map((image) => ({
           slide: image,
           alt: title,

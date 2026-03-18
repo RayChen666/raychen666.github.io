@@ -8,7 +8,9 @@ import {
   Text,
   Row,
   Media,
+  Card,
 } from "@once-ui-system/core";
+import { formatDate } from "@/utils/formatDate";
 
 interface FeaturedProjectProps {
   title: string;
@@ -31,6 +33,7 @@ export function FeaturedProject({
   projectUrl, 
   codeUrl 
 }: FeaturedProjectProps) {
+  
   return (
     <Column fillWidth gap="m" paddingX="l">
       {/* Split Media Section */}
@@ -39,7 +42,7 @@ export function FeaturedProject({
         <Column flex={1}>
           <Media
             aspectRatio="16 / 9"
-            radius="m"
+            radius="l-4"
             alt={title}
             src={images[0]}
           />
@@ -51,9 +54,9 @@ export function FeaturedProject({
             controls 
             width="100%" 
             style={{ 
-              borderRadius: '8px',
+              borderRadius: '20px',
               aspectRatio: '16/9',
-              objectFit: 'cover'
+              objectFit: 'cover',
             }}
           >
             <source src={videoUrl} type="video/mp4" />

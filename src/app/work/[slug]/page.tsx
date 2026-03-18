@@ -140,7 +140,7 @@ export default async function Project({
         <Media 
         priority 
         aspectRatio="16 / 9" 
-        radius="m" 
+        radius="l-4" 
         alt="image" 
         src={post.metadata.images[0]} />
       )}
