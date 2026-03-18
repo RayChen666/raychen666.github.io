@@ -39,7 +39,9 @@ export default function Post({ post, thumbnail, direction }: PostProps) {
       )}
       <Row fillWidth>
         <Column maxWidth={28} paddingY="24" paddingX="l" gap="20" vertical="center">
-          <Row gap="24" vertical="center">
+          <Row 
+          gap="24" 
+          vertical="center">
             {/*<Row vertical="center" gap="16">
               <Avatar src={person.avatar} size="s" />
               <Text variant="label-default-s">{person.name}</Text>

@@ -17,7 +17,7 @@ export function Posts({
   thumbnail = false,
   exclude = [],
   direction,
-  gap = "16",
+  gap = "m",
 }: PostsProps) {
   let allBlogs = getPosts(["src", "app", "blog", "posts"]);
 

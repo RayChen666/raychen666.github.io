@@ -209,13 +209,13 @@ const socialSharing: SocialSharingConfig = {
   display: true,
   platforms: {
     x: true,
-    linkedin: true,
+    linkedin: false,
     facebook: false,
     pinterest: false,
     whatsapp: false,
     reddit: true,
     telegram: false,
-    email: true,
+    email: false,
     copyLink: true,
   },
 };

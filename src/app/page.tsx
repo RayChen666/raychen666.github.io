@@ -348,7 +348,12 @@ export default function Home() {
 
 
       {routes["/blog"] && (
-        <Column fillWidth gap="24" marginBottom="l" paddingX="l" >
+        <Column 
+          fillWidth 
+          gap="24" 
+          marginBottom="l" 
+          paddingX="l" 
+        >
 
           <Column fillWidth gap="32" marginTop="40" s={{ direction: "column" }}>
             <Row flex={1} paddingTop="0" horizontal="center">
