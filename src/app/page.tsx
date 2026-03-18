@@ -162,9 +162,9 @@ export default function Home() {
                           }}
                         > 
                         <a href={about.path} style={{ textDecoration: 'none', color: 'inherit' }} className="hoverLink">
-                        <LineShadowText shadowColor="#5ba3c9" as="span">
-                          {person.name}
-                        </LineShadowText>
+                          <LineShadowText shadowColor="#5ba3c9" as="span">
+                            {person.name}
+                          </LineShadowText>
                         </a>
                   </Heading>
                   
@@ -181,7 +181,6 @@ export default function Home() {
                     
                   >
                     <AuroraText
-                      //colors={["#FF0080", "#7928CA", "#0070F3", "#38bdf8"]}
                       colors={["#5ba3c9", "#67e8f9", "#7dd3fc", "#93c5fd"]}
                       //colors={["#67e8f9", "#7dd3fc"]}
                       speed={1}
