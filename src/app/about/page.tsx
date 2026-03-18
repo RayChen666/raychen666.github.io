@@ -252,7 +252,10 @@ export default function About() {
                     variant="secondary"
                     icon="chevronRight"
                     size="s"
-                    style={{ height: "30px", width: "30px", minHeight: "unset" }}
+                    style={{ height: "30px", width: "30px", 
+                      minHeight: "unset",
+                      border: '1.0px solid var(--brand-alpha-medium)',
+                    }}
                   />
                 </Row>
 
@@ -288,6 +291,7 @@ export default function About() {
                         width: "36px", 
                         minHeight: "unset",
                         //marginLeft: "auto" 
+                        border: '1px solid var(--brand-alpha-medium)',
                         
                       }}
                       

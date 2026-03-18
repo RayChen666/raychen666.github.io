@@ -153,7 +153,7 @@ export default function Home() {
                 <Heading 
                           className={styles.textAlign} 
                           variant="display-default-l"
-                          onBackground="neutral-weak"
+                          onBackground="neutral-medium"
                           
                           style={{ 
                             fontFamily: '"Press Start 2P", cursive',
@@ -204,7 +204,7 @@ export default function Home() {
                   className={styles.heroTextColumn}
                 > 
                    <Badge 
-                    onBackground="neutral-weak"
+                    onBackground="neutral-medium"
                     background ="brand-alpha-weak"
                     border="neutral-alpha-weak"
                     style={{height: '20px'}}
@@ -214,7 +214,7 @@ export default function Home() {
                     Agent System
                   </Badge>
                   <Badge
-                    onBackground="neutral-weak"
+                    onBackground="neutral-medium"
                     background ="brand-alpha-weak"
                     border="neutral-alpha-weak"
                     style={{height: '20px'}}
@@ -224,7 +224,7 @@ export default function Home() {
                     XR
                   </Badge>
                   <Badge
-                    onBackground="neutral-weak"
+                    onBackground="neutral-medium"
                     background ="brand-alpha-weak"
                     border="neutral-alpha-weak"
                     style={{ height: '20px' }}
@@ -234,7 +234,7 @@ export default function Home() {
                     Robotics
                   </Badge>
                   <Badge
-                    onBackground="neutral-weak"
+                    onBackground="neutral-medium"
                     background ="brand-alpha-weak"
                     border="neutral-alpha-weak"
                     style={{height: '20px' }}
@@ -244,7 +244,7 @@ export default function Home() {
                     HCI
                   </Badge> 
                   <Badge
-                    onBackground="neutral-weak"
+                    onBackground="neutral-medium"
                     background ="brand-alpha-weak"
                     border="neutral-alpha-weak"
                     style={{ height: '20px' }}
@@ -274,7 +274,7 @@ export default function Home() {
             //variant="display-default-s" 
             //style={{ fontFamily: '"Bitcount Single", sans-serif',color: 'transparent', WebkitTextStroke: '0.7px #5ba3c9',}}
             
-            onBackground="neutral-weak"
+            onBackground="neutral-medium"
                           
             style={{ 
               fontFamily: '"Press Start 2P", cursive',           
@@ -356,7 +356,7 @@ export default function Home() {
               <Heading 
                 as="h2" variant="display-strong-xs" wrap="balance"
                  
-                onBackground="neutral-weak"
+                onBackground="neutral-medium"
                               
                 style={{ 
                   fontFamily: '"Press Start 2P", cursive',           
