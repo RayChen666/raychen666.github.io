@@ -352,8 +352,9 @@ export default function Home() {
           gap="24" 
           marginBottom="l" 
           paddingX="l" 
-        >
+        > 
 
+          <div id="latest-posts" style={{ scrollMarginTop: '40px' }}>
           <Column fillWidth gap="32" marginTop="40" s={{ direction: "column" }}>
             <Row flex={1} paddingTop="0" horizontal="center">
               <Heading 
@@ -376,11 +377,11 @@ export default function Home() {
             </Row>
 
             <Column flex={1} >
-            <Posts range={[1, 2]} columns="1"  gap="m" thumbnailWidth={18}/>
+            <Posts range={[1, 4]} columns="1"  gap="m" thumbnailWidth={18}/>
             </Column>
           </Column>
-
-        </Column>
+          </div>
+        </Column>    
       )}
       <Projects range={[5]} />
       <Mailchimp /> 
