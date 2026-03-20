@@ -23,7 +23,7 @@ Generation and Editing via Large Language Model](https://arxiv.org/abs/2406.0386
 - [LayoutGPT: Compositional Visual Planning and Generation with Large Language Models
 ](https://proceedings.neurips.cc/paper_files/paper/2023/hash/3a7f9e485845dac27423375c934cb4db-Abstract.html)
 
-## Review of article one
+## Article One Review
 
 From article "[Improving Obstacle Awareness to Enhance Interaction in Virtual Reality
 ](https://ieeexplore.ieee.org/document/9089649)", the core novelty of this paper is an **augmented virtuality 
@@ -42,5 +42,53 @@ it accept "dynamic updates" to the assets in the virtual world, so all the colli
 long as we have multiple RTX 5090 GPU cards).
 
 ## Obsticle Detection
+
+<figure style={{ maxWidth: '768px', margin: '1.5rem auto' }}>
+   <img src="/images/blog/4-literature-review-note/obsticle-detection.jpg" 
+    alt="Control panel layout" 
+    width="100%"
+    style={{ borderRadius: '20px' }}
+  />
+</figure>
+
+The detection pipeline in this paper runs as an offline preprocessing step: a Microsoft Kinect RGB-D camera scans the real 
+room, producing a raw 3D mesh. A voxelization pass then sweeps a matrix of cubes through the mesh, and adjacent voxels are 
+grouped by closeness into clusters, each replaced by a **minimum bounding** box parallelepiped. Finally, each bounding box is 
+matched against a small dictionary of virtual objects using a shape-ratio distance metric, scaled to fit, and placed at the 
+exact real-world position.
+
+At first glance, this pipeline seems conceptually relevant to our Verification Agent — both systems need to reason about 
+**whether a placed object occupies a geometrically valid position**. However, the analogy breaks down quickly once we examine 
+why this paper needs bounding box inference in the first place.
+
+In their system, bounding boxes must be discovered from noisy sensor data, introducing overestimation errors of 35–107% 
+depending on object complexity. This uncertainty is an unavoidable consequence of bridging the real world into the virtual 
+one. Our system faces no such problem: since we control the GLTF asset library and set default scales at load time, every 
+object's bounding box is a **known constant** — not something that needs to be inferred.
+
+## Verification Agent Design
+
+This distinction actually sharpens what our Verification Agent's job really is. Rather than geometric discovery, it 
+performs **constraint satisfaction checking** over exact, pre-registered geometry:
+
+- **Overlap detection** — given fixed bounding boxes for all scene objects plus the newly proposed object, does any spatial 
+intersection occur?
+
+- **Relational consistency** — does a command like "beside the table" resolve to a position genuinely outside the table's 
+known bounding box at an appropriate lateral offset?
+
+- **Scale plausibility** — is the asset's fixed size semantically reasonable for the command? A "small lamp" shouldn't 
+arrive with a 2-meter bounding box.
+
+- **Ground truth checking** — is the **y_offset** correctly applied so the object sits flush on the floor or surface, 
+rather than floating or clipping through it?
+
+This makes our Verification Agent more **precise and reliable** than the approach described in this paper, because we 
+operate on exact geometry rather than approximated bounding boxes with significant error margins. Our system sidesteps an 
+entire class of geometric uncertainty that real-world-bridging pipelines are forced to wrestle with — and because all bounding 
+box data is available at runtime in the virtual scene graph, collision checks can be performed **dynamically and in real time**, 
+rather than requiring an offline scan before each session.
+
+## Article Two Review
 
 
