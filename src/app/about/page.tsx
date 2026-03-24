@@ -165,6 +165,9 @@ export default function About() {
                             size="s"
                             weight="default"
                             variant="secondary"
+                            style={{
+                              borderColor: "var(--neutral-alpha-medium)",
+                            }}
                           />
                         </Row>
                         <Row hide s={{ hide: false }}>
@@ -174,6 +177,10 @@ export default function About() {
                             href={item.link}
                             icon={item.icon}
                             variant="secondary"
+                            style={{
+                              borderColor: "var(--neutral-alpha-medium)",
+                              //background:"var(--brand-alpha-weak)",
+                            }}
                           />
                         </Row>
                       </React.Fragment>
@@ -232,7 +239,7 @@ export default function About() {
                 {/* Desktop: small pill button */}
                 <Row s={{ hide: true }}
                   fitWidth
-                  border="neutral-alpha-weak"
+                  border="neutral-alpha-medium"
                   background="brand-alpha-weak"
                   radius="full"
                   padding="0"
@@ -254,7 +261,7 @@ export default function About() {
                     size="s"
                     style={{ height: "30px", width: "30px", 
                       minHeight: "unset",
-                      border: '1.0px solid var(--brand-alpha-medium)',
+                      border: '1.0px solid var(--brand-alpha-strong)',
                     }}
                   />
                 </Row>
@@ -263,7 +270,7 @@ export default function About() {
                 <Row hide s={{ hide: false }} marginBottom="m" className={styles.blockAlign}>
                   <Row
                     fitWidth
-                    border="neutral-alpha-weak"
+                    border="neutral-alpha-medium"
                     background="brand-alpha-weak"
                     radius="full"
                     paddingX="12"
@@ -291,7 +298,8 @@ export default function About() {
                         width: "36px", 
                         minHeight: "unset",
                         //marginLeft: "auto" 
-                        border: '1px solid var(--brand-alpha-medium)',
+
+                        border: '1px solid var(--brand-alpha-strong)',
                         
                       }}
                       
