@@ -76,6 +76,7 @@ So the memory agent produces something like:
 
 <CodeBlock
     marginBottom="16"
+    style={{ borderRadius: '20px' }}
     codes={[
       {
         code:
@@ -121,6 +122,7 @@ text alone. An example image makes it concrete and unambiguous.
 
 <CodeBlock
     marginBottom="16"
+    style={{ borderRadius: '20px',}}
     codes={[
       {
         code:
@@ -139,7 +141,7 @@ Target room image  → "What should it LOOK LIKE?"
                         Circulation patterns
 `,
         language: "txt",
-        label: "Workflow"
+        label: "txt",
       }
     ]}
 />
@@ -147,6 +149,7 @@ Target room image  → "What should it LOOK LIKE?"
 **The actual memory agent prompt structure then becomes:**
 <CodeBlock
     marginBottom="16"
+    style={{ borderRadius: '20px' }}
     codes={[
       {
         code:
@@ -175,14 +178,14 @@ Your task:
 
 Output:
 {
-  "anchor_object": "desk",
-  "functional_zones": {...},
-  "cluster_relations": [...],
-  "spatial_constraints_from_current_scene": {...}
+    "anchor_object": "desk",
+    "functional_zones": {...},
+    "cluster_relations": [...],
+    "spatial_constraints_from_current_scene": {...}
 }
 `,
-        language: "JSON",
-        label: "JSON"
+      language: "JSON",
+      label: "JSON"
       }
     ]}
 />
