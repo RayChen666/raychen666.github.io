@@ -84,31 +84,33 @@ and related messages in the custom WebSocket based communication
 middleware are both visualized in figure above and summarized in
 table below.
 
-<table style={{ width: '100%', borderCollapse: 'collapse', marginBottom: '0.5rem' }}>
-  <thead>
-    <tr style={{ borderBottom: '2px solid #444' }}>
-      <th style={{ textAlign: 'left', padding: '0.5rem 1rem 0.5rem 0' }}>Topic Name</th>
-      <th style={{ textAlign: 'left', padding: '0.5rem 1rem' }}>Message Type</th>
-      <th style={{ textAlign: 'left', padding: '0.5rem 0 0.5rem 1rem' }}>Data Transmitted</th>
-    </tr>
-  </thead>
-  <tbody>
-    {[
-      ['robot_odom_i', 'webxr_robot_pos', "Robots' odometry"],
-      ['static_occupancy', 'webxr_static_occupancy', 'Point cloud representing the 3D occupancy map'],
-      ['final_goal', 'webxr_final_goal', 'High level goal in the map'],
-      ['mpl_path', 'webxr_mpl_path', 'Path computed by the motion primitive local planner'],
-      ['take_control', 'webxr_take_control', 'Boolean flag to switch control of the robots'],
-      ['user_target', 'webxr_des_pos', "The user's desired position and orientation"],
-    ].map(([topic, type, data]) => (
-      <tr key={topic} style={{ borderBottom: '1px solid #333' }}>
-        <td style={{ padding: '0.6rem 1rem 0.6rem 0' }}><code>{topic}</code></td>
-        <td style={{ padding: '0.6rem 1rem' }}><code>{type}</code></td>
-        <td style={{ padding: '0.6rem 0 0.6rem 1rem', color: '#aaa' }}>{data}</td>
+<div style={{ overflowX: 'auto', width: '100%', marginBottom: '0.5rem' }}>
+  <table style={{ width: '100%', borderCollapse: 'collapse', minWidth: '480px' }}>
+    <thead>
+      <tr style={{ borderBottom: '2px solid #444' }}>
+        <th style={{ textAlign: 'left', padding: '0.5rem 1rem 0.5rem 0' }}>Topic Name</th>
+        <th style={{ textAlign: 'left', padding: '0.5rem 1rem' }}>Message Type</th>
+        <th style={{ textAlign: 'left', padding: '0.5rem 0 0.5rem 1rem' }}>Data Transmitted</th>
       </tr>
-    ))}
-  </tbody>
-</table>
+    </thead>
+    <tbody>
+      {[
+        ['robot_odom_i', 'webxr_robot_pos', "Robots' odometry"],
+        ['static_occupancy', 'webxr_static_occupancy', 'Point cloud representing the 3D occupancy map'],
+        ['final_goal', 'webxr_final_goal', 'High level goal in the map'],
+        ['mpl_path', 'webxr_mpl_path', 'Path computed by the motion primitive local planner'],
+        ['take_control', 'webxr_take_control', 'Boolean flag to switch control of the robots'],
+        ['user_target', 'webxr_des_pos', "The user's desired position and orientation"],
+      ].map(([topic, type, data]) => (
+        <tr key={topic} style={{ borderBottom: '1px solid #333' }}>
+          <td style={{ padding: '0.6rem 1rem 0.6rem 0' }}><code>{topic}</code></td>
+          <td style={{ padding: '0.6rem 1rem' }}><code>{type}</code></td>
+          <td style={{ padding: '0.6rem 0 0.6rem 1rem', color: '#aaa' }}>{data}</td>
+        </tr>
+      ))}
+    </tbody>
+  </table>
+</div>
 
 
 ## Reault

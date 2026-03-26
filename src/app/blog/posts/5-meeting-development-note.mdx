@@ -29,12 +29,145 @@ with deletion button added)
 
 **Ray**: 
 
-- Complex route architecture setup.
+- Complex route architecture setup. (In progress)
 
 - Compare the various language input source (headset direct input, Gemini API, browser voice recognition) to decide 
-which one to use for the voice input feature development.  
+which one to use for the voice input feature development. (Done, check out later section)
 
-- Continue to complete 2 literature reviews for the user study design.
+- Continue to complete 2 literature reviews for the user study design. (Done, check out 
+blog posts Literature Review Note [1](https://raychen666.vercel.app/blog/4-literature-review-note) and 
+[2](https://raychen666.vercel.app/blog/6-literature-review-note-2))
+
+## Voice Input
+
+There are three available options for the voice input as Saurarbh and I proposed in our last meeting: 
+Headset Direct Input (Meta Quest built-in), Web Speech API (Browser Voice Recognition), and Gemini API, each has its 
+own Pros and Cons. 
+
+**A. Headset Direct Input**
+
+**Pros:**
+
+- Lowest latency — processed on-device or via Meta's own pipeline
+
+- No extra API calls in the chain
+
+**Cons:**
+
+- Tightly coupled to Meta's ecosystem — breaks portability to other headsets
+
+- Limited programmatic control
+
+Conclusion: Not viable for our browser-based WebXR system. The OS-level voice input isn't cleanly 
+accessible from a web context.
+
+**B. Web Speech API**
+
+This is the `webkitSpeechRecognition` / `SpeechRecognition` API built into browsers.
+
+**Pros:**
+
+- Zero cost — completely free
+
+- Native to the browser, no extra dependencies
+
+- Works in WebXR context since it's just a browser API
+
+- Simple to implement
+
+**Cons:**
+
+- Chrome only in practice — Firefox and Safari support is inconsistent 
+
+- Requires internet connection
+
+- No custom vocabulary — technical terms like object names may misfire
+
+**C. Gemini API**
+
+Using a cloud speech-to-text API explicitly — either Gemini's multimodal 
+input, or Google Cloud Speech-to-Text.
+
+**Pros:**
+
+- Best accuracy, especially for technical/accent-specific vocabulary
+
+- Gemini specifically can handle speech + context together
+
+- Configurable — custom vocabulary, confidence thresholds, language 
+model priming
+
+**Cons:**
+
+- Added latency — network round trip for every utterance
+
+- Cost — API calls add up, especially during user studies
+
+- Requires audio capture pipeline in WebXR, which adds implementation complexity
+
+<table style={{ width: '100%', borderCollapse: 'collapse', marginBottom: '0.5rem' }}>
+  <thead>
+    <tr style={{ borderBottom: '2px solid #444' }}>
+      <th style={{ textAlign: 'left', padding: '0.5rem 1rem 0.5rem 0' }}>Dimension</th>
+      <th style={{ textAlign: 'left', padding: '0.5rem 1rem' }}>Headset Native</th>
+      <th style={{ textAlign: 'left', padding: '0.5rem 1rem' }}>Web Speech API</th>
+      <th style={{ textAlign: 'left', padding: '0.5rem 0 0.5rem 1rem' }}>Gemini/Whisper</th>
+    </tr>
+  </thead>
+  <tbody>
+    {[
+      ['Accuracy', 'Medium', 'Low-Medium', 'High'],
+      ['Latency', 'Lowest', 'Low', 'Medium (network)'],
+      ['WebXR compatibility', 'Poor', 'Medium', 'Good'],
+      ['Cost', 'Free', 'Free', 'Per-call'],
+      ['Domain adaptation', 'None', 'None', 'Yes'],
+      ['Implementation complexity', 'High', 'Low', 'Medium'],
+      ['Portability', 'Quest only', 'Cross-browser', 'Any platform'],
+      ['Interim results', 'Limited', 'Yes', 'No (Whisper) / Yes (streaming Gemini)'],
+    ].map(([dimension, native, webSpeech, gemini]) => (
+      <tr key={dimension} style={{ borderBottom: '1px solid #333' }}>
+        <td style={{ padding: '0.6rem 1rem 0.6rem 0' }}><code>{dimension}</code></td>
+        <td style={{ padding: '0.6rem 1rem', color: '#aaa' }}>{native}</td>
+        <td style={{ padding: '0.6rem 1rem', color: '#aaa' }}>{webSpeech}</td>
+        <td style={{ padding: '0.6rem 0 0.6rem 1rem', color: '#aaa' }}>{gemini}</td>
+      </tr>
+    ))}
+  </tbody>
+</table>
+
+**Proposed Solution:**
+
+At first we finished the first worable demo with web speech API, as it is fast to 
+implement, zero friction, good enough for controlled lab conditions, where we 
+control the environment and can speak clearly. Also, using it to get the rest of the 
+pipeline to work first without being blocked by audio infrastructure makes sense, as building 
+audio infra takes a lot of time and is not our main research goal.
+
+**Gemini for the complex route specifically**
+
+Since our complex route already involves a heavier reasoning step in the memory agent, 
+the extra latency of a Gemini API call seems acceptable here. Also, Gemini's ability to take 
+audio + scene context together could actually collapse the voice recognition + language agent 
+steps into one call for complex commands, which is an interesting optimization, but this requires 
+further development (depends on the time availability). 
+
+**Pipeline**
+
+<CodeBlock
+    marginBottom="16"
+    style={{ borderRadius: '20px',}}
+    codes={[
+      {
+        code:
+`
+Microphone → Web Speech API → transcript string
+     → WebSocket → FastAPI backend → Language Agent pipeline
+`,
+        language: "txt",
+        label: "txt",
+      }
+    ]}
+/>
 
 ## Deadline
 
