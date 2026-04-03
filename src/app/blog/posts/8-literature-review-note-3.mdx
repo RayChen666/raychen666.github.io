@@ -28,9 +28,9 @@ This is essentially the same intellectual bet our **Multi-Agent-XR** is making: 
 translate natural language commands into spatial scene state. LayoutGPT validates this bet empirically, which matters for our 
 related work framing.
 
-## Structured Output formatted
+## Structured Output
 
-This is the part of the paper I found most directly useful for our research.
+This is the part of the paper I found most directly useful to our research.
  
 The key insight is that **how you represent spatial information to an LLM changes the quality of spatial reasoning significantly**. 
 LayoutGPT's ablation study (Table 4, Section 4.4) tested three different output representations:
@@ -42,7 +42,15 @@ LayoutGPT's ablation study (Table 4, Section 4.4) tested three different output 
 - **CSS format with normalization** — `object { width: 32px; height: 45px; left: 31px; top: 9px; }`. Labeled and expressed as integers 
 in a familiar unit (pixels).
 
-The full combination — CSS structure plus normalization — consistently outperformed the others. The CSS format alone gave the biggest 
+<figure style={{ maxWidth: '768px', margin: '1.5rem auto' }}>
+   <img src="/images/blog/8-literature-review-note-3/figure-2.jpg" 
+    alt="Control panel layout" 
+    width="100%"
+    style={{ borderRadius: '20px' }}
+  />
+</figure>
+
+The full combination — CSS structure plus normalization — consistently **outperformed** the others. The CSS format alone gave the biggest 
 single boost, and the paper's argument is that LLMs are pretrained on massive code datasets including actual CSS, so this format 
 activates spatial knowledge already encoded in the model weights rather than asking it to reason from scratch.
 
