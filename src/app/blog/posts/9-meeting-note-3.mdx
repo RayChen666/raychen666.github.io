@@ -14,9 +14,264 @@ tag: "Research Meeting"
 
 ## Meeting Content
 
+- Research related **Q&A**
+
+- **Literature review** discussion
+
+## Image Agent Design
+
+**Question:** How is the memory module / agent process the image and generate the sumantc layout plan for scene and asset agent to 
+understand?
+
+**Answer:** separate the image processing function to another image agent
+
+The current design for thr memory module is like:
+
+<CodeBlock
+    marginBottom="16"
+    style={{ borderRadius: '20px' }}
+    codes={[
+      {
+        code:
+`
+ Functionality:
+        1. Detect the TARGET room type from the user's natural-language command.
+        2. Load a REFERENCE IMAGE for that room type (semantic layout grounding).
+        3. Read the CURRENT SCENE JSON (ground-truth object state).
+        4. Run a two-stage LLM reasoning call:
+            Stage A — semantic layout: 
+                extract anchor, zones, cluster relations from the reference image.
+            Stage B — delta planning: 
+                compare current scene against the target layout → decide what to 
+                KEEP / REMOVE / ADD, with quantities and descriptions the Asset 
+                Agent can consume directly.
+        5. Return a unified memory_context dict that the Orchestrator stores in
+        state["memory_context"] before handing off to the Asset Agent and
+        Scene Agent.
+`,
+        language: "JSON",
+        label: "JSON"
+      }
+    ]}
+/>
+
+This means, we separate step 2, 3, and 4.A to form an image agent, while the memory module import the processing 
+result of the image agent and only do step 1, 4.B, and 5.
+
+## AI Hallucination
+
+One issue Saurabh noticed and discussed we me is the **"LLM Hallucination"**. To understand, check links below:
+
+- **Medium post:** [LLM Hallucinations Explained](https://medium.com/@nirdiamant21/llm-hallucinations-explained-8c76cdd82532)
+
+- **IBM blog:** [What Are AI Hallucinations?](https://www.ibm.com/think/topics/ai-hallucinations)
+
+- **ACM TOIS conference paper:** [A Survey on Hallucination in Large Language Models](https://arxiv.org/abs/2311.05232)
+
+To connect this to our use case and system design, we raised a potential symptom case: when we look at the top-to-bottom view of the 
+office layout (see picture below), we, as human, clearly know that the 3 triangle-shapes are windows due to our life experience and 
+logical reasoining. However, for AI with hallucination, it is likely that they mark those as doors or some furnitures. (It is impossible 
+for an office to have 3 dorrs in one-side wall, and this is intuitive to human). 
+
+<figure style={{ maxWidth: '768px', margin: '1.5rem auto' }}>
+   <img src="/images/blog/9-meeting-note-3/office.jpg" 
+    alt="Control panel layout" 
+    width="100%"
+    style={{ borderRadius: '20px' }}
+  />
+</figure>
+
+Temporary solution after we discuessed include labelling something we find too vague for AI to understand (this need to be tested before 
+fully implemented) direcly inside the image (see picture below).
+
+<figure style={{ maxWidth: '768px', margin: '1.5rem auto' }}>
+   <img src="/images/blog/9-meeting-note-3/window-label.jpg" 
+    alt="Control panel layout" 
+    width="100%"
+    style={{ borderRadius: '20px' }}
+  />
+</figure>
+
+Noting that this topic also worth further investigation and framing it better will potentially be a top-tier AI conference level publication, 
+but as for this research we're doing HCI stuff so we just resolve the minimum functionality not doing improvement to the 
+precision and benchmarking.
+
+## Graph-Based Data Structure
+
+From the [literature review](https://raychen666.vercel.app/blog/8-literature-review-note-3) discussion we identified that the structured-
+representation of spatial information significantly improves the quality of spatial reasoning ability of LLMs. Our original `metadata.json` is 
+like
+
+<CodeBlock
+    marginBottom="16"
+    style={{ borderRadius: '20px' }}
+    codes={[
+      {
+        code:
+`
+{
+    "name": "chair",
+    "category": "furniture",
+    "subcategory": "seating",
+    "default_scale": {
+      "x": 0.005,
+      "y": 0.005,
+      "z": 0.005
+    },
+    "properties": {
+      "movable": true,
+      "interactive": true,
+      "canSitOn": true,
+      "weight": "light"
+    },
+    "typical_dimensions": {
+      "width": 0.2,
+      "height": 0.5,
+      "depth": 0.2
+    },
+    "default_rotation": {
+      "x": 0,
+      "y": 0,
+      "z": 0
+    },
+    "aliases": [
+      "seat",
+      "dining chair"
+    ],
+    "description": "A standard dining chair suitable for seating at tables"
+  }
+`,
+        language: "JSON",
+        label: "JSON"
+      }
+    ]}
+/>
+
+After the memory agent generate the graph-based spatial relationship, will be something like:
+
+<CodeBlock
+    marginBottom="16"
+    style={{ borderRadius: '20px' }}
+    codes={[
+      {
+        code:
+`
+{
+  "layout_graph": {
+    "nodes": ["chair", "table", "lamp", "back_wall"],
+    "edges": [
+      { "from": "chair", "to": "table", "relation": "close_to", "side": "south" },
+      { "from": "table", "to": "back_wall", "relation": "next_to", "side": "north" },
+      { "from": "lamp", "to": "back_wall", "relation": "at_corner", "corner": "back_right" }
+    ]
+  }
+}
+`,
+        language: "JSON",
+        label: "JSON"
+      }
+    ]}
+/>
+
+The asset agent will review information from memory agent, take original `matadata.json` and add something like:
+
+<CodeBlock
+    marginBottom="16"
+    style={{ borderRadius: '20px' }}
+    codes={[
+      {
+        code:
+`
+"spatial_relationships": {
+    "preferred_anchors": [
+      {
+        "target_category": "furniture/surface",
+        "relation": "close_to",
+        "offset_direction": "side",
+        "gap_meters": 0.1,
+        "priority": 1
+      }
+    ],
+    "avoid": [
+      {
+        "target_category": "furniture/surface",
+        "relation": "on_top_of"
+      }
+    ],
+    "placement_hints": {
+      "wall_affinity": "none",
+      "cluster_with": ["furniture/seating"],
+      "face_toward": "furniture/surface"
+    }
+  }
+`,
+        language: "JSON",
+        label: "JSON"
+      }
+    ]}
+/>
+
+Finally the scene agent will resolve by outputing something like:
+
+<CodeBlock
+    marginBottom="16"
+    style={{ borderRadius: '20px' }}
+    codes={[
+      {
+        code:
+`
+{
+  "id": "chair_01",
+  "name": "chair",
+  "position": { "x": 1.2, "y": 0.0, "z": -0.8 },
+  "rotation": { "x": 0, "y": 180, "z": 0 },
+  "scale": { "x": 0.005, "y": 0.005, "z": 0.005 },
+
+  "spatial_graph": {
+    "edges": [
+      {
+        "relation": "close_to",
+        "target_id": "table_01",
+        "target_name": "table",
+        "distance_meters": 0.1,
+        "direction": "south"
+      }
+    ],
+    "anchor": "table_01",
+    "zone": "dining_area"
+  }
+}
+`,
+        language: "JSON",
+        label: "JSON"
+      }
+    ]}
+/>
+
+We understand that adding this level of data pipeline is a huge amount of engineering work, so primarily we need to do some 
+literature reviews to determine whether there is already some open-source Git repos and publications to talk about this, which is 
+a kind of extension to last literature review.
+
 ## Task list
 
+**Saurabh**
+
+- Fully implement the delete / remove functionality, test it in all cases, make the pull request, and commit to branch after review.
+
+- Start to build pipeline for STT (Speech-to-Text). Use broswer transcription + LLM contextual processing as we've discussed in previous meeting 
+(to review, see [meeting note](https://raychen666.vercel.app/blog/7-meeting-note-2#speech-to-text)).
+
+**Ray**
+
+- Literature review for topics discuessed (graph-based data strcture for JSON output) in the meeting.
+
+- Continue to work on the memory module and image agent design.
+
+- Meet w/ Ken next week to report progress and dicuess further research directioon.
+
 ## Deadline
+
+Before next meeting time **(04/10/26 01:30PM)**.
 
 <style>
 {`
