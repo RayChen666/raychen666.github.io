@@ -14,16 +14,16 @@ tag: "Literature Review"
 
 ## Article Links
 
-- RSS 2020 Conference paper: 
+1. RSS 2020 Conference paper: 
 [3D Dynamic Scene Graphs: Actionable Spatial Perception with Places, Objects, and Humans](https://arxiv.org/abs/2002.06289).
 
-- ICLR 2023 Conference paper: [SQA3D: Situated Question Answering in 3D Scenes](https://arxiv.org/abs/2210.07474). 
+2. ICLR 2023 Conference paper: [SQA3D: Situated Question Answering in 3D Scenes](https://arxiv.org/abs/2210.07474). 
 (**GitHub** [link](https://github.com/SilongYong/SQA3D) for the paper above).
 
-- CVPR 2016 Conference paper: 
+3. CVPR 2016 Conference paper: 
 [Visual Genome: Connecting Language and Vision Using Crowdsourced Dense Image Annotations](https://arxiv.org/abs/1602.07332).
 
-- ICRA 2024 Conference paper: 
+4. ICRA 2024 Conference paper: 
 [Translating Universal Scene Descriptions into Knowledge Graphs for Robotic Environment](https://arxiv.org/abs/2310.16737)
 
 ## Summary
@@ -33,9 +33,109 @@ From the [meeting](https://raychen666.vercel.app/blog/9-meeting-note-3#graph-bas
 better for us to speciﬁcally design the SceneGraph data pipeline for the spatial memory module. However, this is a huge amount of the 
 work and not the main research part for this project, so instead, we are seeking for some relevant articles or some 
 open-source frameworks that can be directly used for the SceneGraph. Above are the relevant sources that I found might be useful 
-to our system design & implementation. 
+to our system design & implementation, and also can support our design theory.
 
-We are unable to review all of the articles in this blog post, so I'll just focus on the **first article** for this literature review.
+## Article One
+
+**[3D Dynamic Scene Graphs: Actionable Spatial Perception with Places, Objects, and Humans](https://arxiv.org/abs/2002.06289)**
+
+This is arguably the most foundational paper for our design. Rosinol et al. propose **Dynamic Scene Graphs (DSGs)** — a layered, 
+hierarchical graph representation where nodes encode spatial entities (objects, rooms, agents) and edges encode spatio-temporal 
+relations between them. The key insight is that the graph is *hierarchical*: it organizes the scene at multiple levels of abstraction 
+simultaneously — from individual objects, to places, to rooms, to buildings.
+
+What this means for Multi-Agent-XR is that our current flat adjacency list design (edges between peer objects) is actually 
+a **single layer** of what could be a richer multi-level structure. A room-type node sitting above an object cluster is exactly the 
+kind of abstraction that makes our memory agent's "semantic layout" step meaningful — we're not just tracking where objects are, 
+we're encoding what kind of *zone* they belong to.
+
+The paper also introduces the concept of **actionable representations**: the graph isn't just for visualization or bookkeeping, it 
+actively supports planning and decision-making. This maps directly onto how we intend to use our `layout_graph` — the Memory Agent 
+extracts it, but the Scene Agent *acts* on it to determine final placement. DSGs formalize this two-stage read/act pattern we've 
+been converging toward.
+
+One direct takeaway: our current edge schema (`from`, `to`, `relation`, `side`) is well-aligned with DSG edge semantics. The 
+paper's use of "inclusion" and "adjacency" as primary edge types maps onto our `close_to`, `next_to`, and `at_corner` relation 
+vocabulary.
+
+## Article Two
+
+**[SQA3D: Situated Question Answering in 3D Scenes](https://arxiv.org/abs/2210.07474)**
+
+SQA3D frames 3D scene understanding as a *situated* task: rather than asking "where is the chair?", it asks an agent to first 
+understand its own position and orientation in the scene, *then* reason about the surrounding environment to answer questions. The 
+dataset covers 6.8k unique situations across 650 ScanNet scenes, with 33k+ questions spanning spatial relation comprehension, 
+commonsense reasoning, and multi-hop inference.
+
+<figure style={{ maxWidth: '768px', margin: '1.5rem auto' }}>
+   <img src="/images/blog/10-literature-review-note-4/table-1.jpg" 
+    alt="Control panel layout" 
+    width="100%"
+    style={{ borderRadius: '20px' }}
+  />
+</figure>
+
+The benchmark in the articles argue that 
+the best existing models only reach around 47.20% accuracy, while human participants score around 90.06%. This 
+performance gap tells us something important — **spatial reasoning in 3D is genuinely hard for current LLMs**, and structured 
+representations are critically important, not an optional boost - it affect how AI percepts the world!
+
+For our research framing, SQA3D is useful in two ways. First, it validates that *situatedness* matters — an agent understanding a 
+user's natural language command like "put the lamp to the left of the desk" needs to know where it is in the scene, not just the 
+global layout. Our Scene Agent implicitly handles this through the current scene JSON, but we haven't formally framed it as a 
+situated reasoning problem. Second, the multi-hop reasoning questions in SQA3D mirror the kind of chained inference our Complex 
+Route performs: parse intent → retrieve memory layout → check current scene → compute delta → place object. That's at minimum a 
+3-hop reasoning chain before any placement happens.
+
+This paper could help us argue in the IEEE VR submission that our pipeline architecture is *designed* to support situated spatial 
+reasoning — which is a stronger framing than just "multi-agent system for VR."
+
+
+
+
+## Article Three
+
+**[Visual Genome: Connecting Language and Vision Using Crowdsourced Dense Image Annotations](https://arxiv.org/abs/1602.07332)**
+
+Visual Genome is the dataset infrastructure paper that much of modern scene graph research traces back to. The authors collected 
+dense annotations across 100k+ images — objects, attributes, and crucially, **pairwise relationships** between objects expressed 
+in natural language. Each image averages 18 pairwise relationships, canonicalized to WordNet synsets, forming a structured 
+language-vision bridge.
+
+The relevance to our work is in **relationship vocabulary**. Visual Genome's relationship annotations (e.g., "next to", "on top of", 
+"facing", "behind") are exactly the spatial predicates we use in our `layout_graph` edges. The fact that this vocabulary was 
+crowdsourced from natural image descriptions — not hand-engineered by researchers — means our chosen relations like `close_to`, 
+`next_to`, `facing`, and `adjacent_to` are grounded in how humans *actually* describe spatial scenes in language. That's a 
+meaningful point for our paper: our scene graph schema isn't arbitrary, it reflects the canonical predicate set that emerges from 
+human spatial language.
+
+More concretely, Visual Genome shows that **relationship triplets** (subject → predicate → object) are the atomic unit of 
+spatial language grounding. Our edges are structured identically: `{from: "sofa", to: "back_wall", relation: "next_to", side: "north"}`. 
+This alignment with a foundational vision-language dataset strengthens the theoretical basis of our representation choice. 
+
+## Article Four
+
+**[Translating Universal Scene Descriptions into Knowledge Graphs for Robotic Environment](https://arxiv.org/abs/2310.16737)**
+
+This is the most directly engineering-adjacent paper of the four. Nguyen et al. investigate virtual reality as a medium for robot 
+environment modeling, and propose a pipeline to convert **Universal Scene Description (USD)** format scene graphs into **Knowledge 
+Graph (KG)** representations that support semantic querying and integration with external knowledge sources.
+
+**Description** of Universal Scene Description: [OpenUSD](https://openusd.org/release/index.html)
+
+The core idea is that a raw scene graph (geometry, hierarchy, object names) is not the same as an *actionable* knowledge base. By 
+translating the scene into a KG — where nodes and edges are typed using ontologies (RDF/OWL) — robots can perform semantic queries 
+like "what objects are in the kitchen zone?" or "which objects are on top of a surface-type furniture?" This is essentially what 
+our Memory Agent's `layout_graph` is trying to do in lightweight JSON form. 
+
+For Multi-Agent-XR, this paper indicates a **design gap we should be aware of**: our current graph is structural (adjacency + 
+relations) but not *semantically typed* — we don't classify objects into ontological categories beyond their names. The paper 
+suggests that adding even simple type hierarchies (e.g., `furniture/surface`, `furniture/seating`, `decor/lighting`) would enable 
+more principled placement queries. Notably, this echoes the `spatial_relationships.preferred_anchors` fields we've been sketching 
+into the extended `metadata.json` — those type-based placement rules are a lightweight ontological layer by another name. 
+
+
+
 
 <style>
 {`
