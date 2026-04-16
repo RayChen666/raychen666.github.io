@@ -1,0 +1,192 @@
+---
+title: "Meeting Note (04/12/26)"
+subtitle: "The project development note for 04/12/26 research meeting with Saurabh"
+image: "/images/blog/13-meeting-note-4/cover-image.jpg"
+publishedAt: "2026-04-12"
+tag: "Research Meeting"
+---
+
+## Links
+
+- To access to the project description, navigate to the [XR-MultiAgent](https://raychen666.vercel.app/work/multi-agent-xr).
+
+- To access to the project code, navigate to the [Project Code](https://github.com/RayChen666/Multi-Agent-XR).
+
+- Part of information also takes reference from Saurabh's [meeting note](/documents/meeting-note/saurabh-meeting-note-04-12-26.pdf).
+
+## Meeting Content
+
+- Saurabh's "Remove" and "STT" (Speech-to-Text) function demo, review together with Ray, several test cases tried.
+
+- [Literature review Note 4](https://raychen666.vercel.app/blog/10-literature-review-note-4) discussion.
+
+- Ray's `ImageAgent.py` setup and demo (unable to demo due to inability to do screen sharing)
+
+## Progress
+
+- "Remove/Delete" feature now fully setup and implemented with user's natural language prompt.
+
+- "STT" language input pipeline setup and tested. Now the system has contextual awareness with language parsing layer. For 
+example, when user say "I want to add, em..., eh..., one, oh no!.. two chairs", the voice paring will output as "I want to add 2 chairs", 
+which is really cool and easy to use. 
+
+- `ImageAgent` can now work independently to output layout **SceneGraph**, but the format and precision mapping to other agents' knowledge 
+input must be refined.
+
+## Test ImageAgent
+
+Navigate to terminal at `memory` folder.
+
+<CodeBlock
+    marginBottom="16"
+    style={{ borderRadius: '20px' }}
+    codes={[
+      {
+        code:
+`
+cd /Multi-Agent-XR/backEnd/memory/
+`,
+        language: "txt",
+        label: "bash"
+      }
+    ]}
+/>
+
+Run command:
+
+<CodeBlock
+    marginBottom="16"
+    style={{ borderRadius: '20px' }}
+    codes={[
+      {
+        code:
+`
+python ImageAgent.py
+`,
+        language: "txt",
+        label: "bash"
+      }
+    ]}
+/>
+
+**ImageAgent Output**
+
+- As mentioned previously, the SceneGraph output gives an idea of what is going to be like, 
+but needs further fine-tuning.
+
+- Link to view SceneGraph [output](/documents/output/SceneGraph_output.pdf)
+
+**Literature Review Discussion
+
+I think there are 2 articles (among 4) that best suit our research goal, as this relate well to 
+the research topics (like HRI, spatial navigation, etc.,) that we maybe doing that relate to current project.
+
+- Articles One: 3D Dynamic Scene Graphs: Actionable Spatial Perception with Places, Objects, and Humans
+
+- Article Four: Translating Universal Scene Descriptions into Knowledge Graphs for Robotic Environment 
+
+The other two articles might help us understand what we’re dealing with from a more classic CV/Image Recognition, Object 
+Detection perspective.
+
+## Issues Identified
+
+**Counter-Intuitive Action**
+
+<figure style={{ maxWidth: '768px', margin: '1.5rem auto' }}>
+   <img src="/images/blog/13-meeting-note-4/counter-intuitive-action.jpg" 
+    alt="Control panel layout" 
+    width="100%"
+    style={{ borderRadius: '20px' }}
+  />
+</figure>
+
+When user say "place a chair onto the table", the system undersatand the meaning and do the job correctly. 
+When user say "let the table onto the chair", the system also process the command by placing the table on top of chair. 
+However, this is counter-intuitive in the real-world situation. This reflects a problem that the system now does not have 
+the physical knowldge of the **real-world physics**. 
+
+We are not aiming to solve it at the current development stage, as we are fulfilling the basic functionalities of 
+the world creation. Since real-world users will not think about adding a table and place it on top of the chair in 
+general cases. However, if we are arguing our system as a spatially coherent system, then it is critical to mention this as a 
+bullet point that the system understand real-world physics to some extent. 
+As a result, it worth opening an Issue in the GitHub page.
+
+**Lack of Bounding Box Collision Check**
+
+<figure style={{ maxWidth: '768px', margin: '1.5rem auto' }}>
+   <img src="/images/blog/13-meeting-note-4/collision-check.jpg" 
+    alt="Control panel layout" 
+    width="100%"
+    style={{ borderRadius: '20px' }}
+  />
+</figure>
+
+This image shows two commands used in conjunction, and multiple spatial failures.
+
+- We did, "Add a table", "Add a Chair on top of the table”, “Remove the table”. What happens once the table is removed 
+successfully? We now see a floating chair! This should be an invalid action, yet because the system doesn’t really 
+understand the relationship of objects, especially in the Z-Offset, it removes things indiscriminately.
+
+- Next, “Add four chairs in a straight line”, Causes one of the chairs to clip with the left wall. This might be happening 
+because The VerificationNode doesn’t check for collision with the walls themselves.
+
+**Incorrect Facing Direction**
+
+<figure style={{ maxWidth: '768px', margin: '1.5rem auto' }}>
+   <img src="/images/blog/13-meeting-note-4/facing-direction.jpg" 
+    alt="Control panel layout" 
+    width="100%"
+    style={{ borderRadius: '20px' }}
+  />
+</figure>
+
+Following case of “Add a table”, “Add four chairs surrounding the take with inward facing orientation” is a fascinating 
+use case of how we could encode the “orientation factor” into the SceneAgent. We know what the “front” part of the chair 
+is. But does the LLM know that? It would - if we give it the correct context, at the cost of added complexity.
+
+## Refinement
+
+- User Studies Perspective: We discussed some things that need to be added from the perspective of the user studies, 
+and facilitating the users, one such example is below:
+
+- UI/ UX Perspective: what about feedback to the user? “Error: Failed” is not that helpful when user is trying something 
+new. Although this is not research oriented, it might help us get better survey results in the User Studies that we create.
+
+## To-Do
+
+**Saurabh**
+
+- Commit own branch. 
+
+- Test STT function on hedset.
+
+- Merge Ray's code and test it.
+
+**Ray**
+
+- Open GitHub issue for the problem identified & discussed above.
+
+- Test Saurabh's code and utilize it for the memory module design 
+(integrate semantic layout and remaining pipeline).
+
+- 1-2 Literature review for user study design depends on availability 
+and time constrints. 
+
+## Deadline
+
+Since last meeting held on Sunday, this week's meeting time **TBD**, 
+but works need to be done **ASAP** lol.
+
+<style>
+{`
+  @import url('https://fonts.googleapis.com/css2?family=League+Script&display=swap');
+  .handwritten {
+    font-family: 'Zeyada', cursive !important;
+    font-size: 2.0em;
+    text-align: center;
+  }
+`}
+</style>
+ 
+<p className="handwritten">END</p>
+
