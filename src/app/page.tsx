@@ -293,7 +293,7 @@ export default function Home() {
       <RevealFx translateY="16" delay={0.6} fillWidth>
         <FeaturedProject
           keywords="2026 | Multi-Agent System | HCI | XR"
-          title="XR-MultiAgent"
+          title="MAS-XR"
           //subtitle="The first system to explore collaborative agentic spatial intelligence in XR world"
           description="A real-time multi-agent system that translates natural language into spatially 
           coordinated XR scene creation and manipulation."
