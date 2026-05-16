@@ -22,5 +22,179 @@ tag: "Research Meeting"
 
 **With Ken**
 
-- 
+- User study design.
 
+- Framing on the final paper.
+
+- Interaction mode design choice.
+
+## About
+ 
+This post documents a design discussion with Ken Perlin around a core HCI question in the Multi-Agent XR system: how should
+the system interpret spatial commands that reference objects or locations in the environment? Ken's key suggestion was that
+the system should behave intuitively — like a person would — rather than defaulting to rigid, engineer-driven interaction patterns.
+ 
+## Ken's Core Suggestion: Be Intuitive, Not Engineered
+ 
+Ken's framing centers on the idea that the system should decompose natural language commands the way a human listener would.
+Given a command like:
+ 
+> *"I want to place the table beside the desk."*
+ 
+A person naturally extracts the objects involved — `table`, `desk` — and the spatial relationship — `beside` — then resolves
+placement semantically. No pointing, no mode switching, no additional affordance. The system should do exactly the same.
+ 
+The corollary is that for commands involving **ambiguous spatial references** — like:
+ 
+> *"Place the coffee here."*
+ 
+A person would understand "here" as a signal that the speaker is already indicating a location in space, likely through gesture
+or gaze. The system should recognize this and resolve accordingly, not ask for clarification.
+ 
+## The Deictic Reference Problem
+ 
+The challenge this raises is how to handle **deictic language** — words like "here", "there", "this", "that" — which anchor
+meaning to the speaker's embodied position or attention in the world.
+ 
+There are two distinct cases worth separating carefully:
+ 
+### Case 1: Bare Deictic — No Object Named
+ 
+Commands like:
+ 
+- *"Place it here."*
+
+- *"Put it there."*
+
+These have **no named object** to resolve against. "Here" or "there" refers to a raw location in 3D space. In this case,
+the system genuinely needs the user to indicate *where* in space they mean, so **gaze / hand ray tracking** is required
+to resolve the target position.
+ 
+### Case 2: Deictic + Named Object
+ 
+Commands like:
+ 
+- *"Place the cup on this table."*
+
+- *"Place the laptop on that desk."*
+
+These name a specific object type. The deictic ("this" / "that") is qualifying *which instance* of that object is meant.
+Since the scene graph already has candidates, this can be resolved purely through **spatial proximity calculation** — no
+gaze tracking needed. The system finds the closest matching object to the user's position and resolves from there.
+ 
+This is the cleaner and more important distinction: **it's not "this" vs "that" that determines whether tracking is needed —
+it's whether an object is named at all.**
+ 
+## Resolution Strategy
+ 
+This gives a clean three-way classification for the command decomposition agent:
+ 
+<div style={{ overflowX: 'auto', width: '100%', marginBottom: '0.5rem' }}>
+  <table style={{ width: '100%', borderCollapse: 'collapse', minWidth: '520px' }}>
+    <thead>
+      <tr style={{ borderBottom: '2px solid #444' }}>
+        <th style={{ textAlign: 'left', padding: '0.5rem 1rem 0.5rem 0' }}>Reference Type</th>
+        <th style={{ textAlign: 'left', padding: '0.5rem 1rem' }}>Example</th>
+        <th style={{ textAlign: 'left', padding: '0.5rem 0 0.5rem 1rem' }}>Resolution</th>
+      </tr>
+    </thead>
+    <tbody>
+      {[
+        ['Bare deictic', '"place it here"', 'Gaze / hand ray → world position'],
+        ['Deictic + object', '"place it on this table"', 'Nearest object of that type to user position'],
+        ['Pure semantic', '"place the table beside the desk"', 'Scene graph spatial reasoning'],
+      ].map(([type, example, resolution]) => (
+        <tr key={type} style={{ borderBottom: '1px solid #333' }}>
+          <td style={{ padding: '0.6rem 1rem 0.6rem 0' }}><code>{type}</code></td>
+          <td style={{ padding: '0.6rem 1rem', color: '#aaa' }}>{example}</td>
+          <td style={{ padding: '0.6rem 0 0.6rem 1rem', color: '#aaa' }}>{resolution}</td>
+        </tr>
+      ))}
+    </tbody>
+  </table>
+</div>
+ 
+## No Mode Switching — Always Passive
+ 
+An important design consequence is that **gaze tracking should never be reactively enabled** after parsing a command.
+By the time the system has processed "place it here", the user has already finished speaking and already indicated
+the location — any after-the-fact "now point at it" prompt is clunky and unnatural.
+ 
+The correct approach is to **passively stream gaze / head position during voice input at all times**, and simply
+read from that buffer when the parsed command requires it. The flow looks like:
+ 
+```
+voice input  ──────────────────────────────► NLP pipeline
+                                                   │
+head gaze (continuous, passive)  ──────────► timestamped position buffer
+                                                   │
+                                              if bare deictic detected
+                                              → look up gaze position at
+                                                time of utterance
+```
+ 
+Gaze data is always captured; it's only *consumed* when language signals it's needed. No buttons, no modes, no UX friction.
+ 
+## No User-Facing Controls
+ 
+This also answers the question of whether to give the user a toggle button for gaze pointing: **no**.
+ 
+A button forces the user to think about the system before speaking naturally. That breaks the mental model Ken is
+advocating for. A person talking to another person doesn't press a button before saying "put it over there" — they
+just say it. The system should meet the user there.
+ 
+The only engineering consideration is whether Meta Quest's gaze API supports continuous passive querying without significant
+performance overhead, but that's an infrastructure concern — not a reason to push complexity onto the user. Head gaze
+(cheaper than full eye tracking) is likely sufficient as a proxy for pointing intent.
+
+## User-Defined Scene Bounds
+ 
+Another topic that came up with Ken was around interaction metric design and the nature of the scene itself.
+Currently, the room boundaries in the system are predefined — the size and shape of the virtual sub-world is
+fixed by default. Ken raised the question of whether users should be able to **draw and define the scene bounds
+themselves**, making the spatial canvas entirely user-configured before any object placement begins.
+ 
+It's an interesting HCI idea — giving users authorship over the space itself, not just its contents. However,
+it's clearly out of scope for the current research contribution for a few reasons:
+ 
+- It would require an entirely new interaction mode for boundary definition (drawing, resizing, confirming bounds in XR)
+
+- Scene bounds would need to become dynamic rather than fixed infrastructure
+
+- It would warrant its own user study to evaluate meaningfully
+
+The system's research contribution is the **multi-agent natural language → scene manipulation pipeline**. Scene
+bounds are infrastructure, not the research question. This was also more of a "wouldn't it be interesting if..."
+observation from Ken rather than a directive — thinking out loud about the broader design space.
+ 
+The right place for this is a single line in the paper's future work section:
+ 
+> *"Currently, scene boundaries are predefined; future work could explore allowing users to dynamically define
+> their own spatial canvas prior to scene generation."*
+ 
+One sentence signals awareness of the design space without implying it's an unaddressed gap.
+ 
+## Summary
+ 
+Ken's suggestion distills into one principle: **the system should behave the way a human listener would.** Applied to
+deictic references, this means:
+ 
+- No tracking needed when an object is named — just find the nearest candidate
+
+- Gaze tracking resolved passively from utterance timestamp when bare "here" / "there" is used
+
+- No mode switching, no buttons, no explicit affordances — just natural speech
+
+
+<style>
+{`
+  @import url('https://fonts.googleapis.com/css2?family=League+Script&display=swap');
+  .handwritten {
+    font-family: 'Zeyada', cursive !important;
+    font-size: 2.0em;
+    text-align: center;
+  }
+`}
+</style>
+ 
+<p className="handwritten">END</p>
