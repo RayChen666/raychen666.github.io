@@ -3,7 +3,7 @@ import { Mailchimp } from "@/components";
 import { Posts } from "@/components/blog/Posts";
 import { baseURL, blog, person, newsletter } from "@/resources";
 import { Keywords } from "@/components/keywords";
-
+import { BlogSearch } from "@/components/blog/BlogSearch";
 
 export async function generateMetadata() {
   return Meta.generate({
@@ -40,6 +40,7 @@ export default function Blog() {
         {blog.title}
       </Heading>
       <Column fillWidth flex={1} gap="32">
+        <BlogSearch />
         {/*<Posts range={[1, 1]} thumbnail={true} />*/}
         <Posts range={[1, 4]} columns="2"  thumbnail direction="column" />
         <Mailchimp marginBottom="l" />
