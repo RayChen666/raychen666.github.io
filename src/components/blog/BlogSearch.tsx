@@ -24,8 +24,6 @@ function renderMarkdown(text: string) {
       <a
         key={match.index}
         href={match[2]}
-        target="_blank"
-        rel="noopener noreferrer"
         style={{
           color: "var(--brand-strong)",
           textDecoration: "underline",
