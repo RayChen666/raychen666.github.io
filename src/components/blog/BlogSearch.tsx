@@ -248,12 +248,20 @@ export function BlogSearch() {
                     backgroundClip: "text",
                     WebkitTextFillColor: "transparent",
                     color: "transparent",
-                    fontSize: "15px",
+                    padding: "3px",
+                    fontSize: "24px",
+                    position: "relative",
+                    top: "1px",
                   }}
                 >
                   ✦
                 </span>
-                {" "}Ask AI
+                {" "}
+                <span 
+                  style={{ position: "relative", bottom: "2.5px" }}
+                >
+                  Ask Gemini 
+                </span>
               </span>
               <button
                 onClick={handleClose}
@@ -263,9 +271,11 @@ export function BlogSearch() {
                   cursor: "pointer",
                   color: "var(--neutral-weak)",
                   opacity: 0.5,
-                  padding: "2px",
+                  padding: "5px",
                   display: "flex",
                   alignItems: "center",
+                  position: "relative",
+                  top: "1px",
                 }}
               >
                 <svg
@@ -354,7 +364,7 @@ export function BlogSearch() {
               style={{
                 display: "flex",
                 gap: "8px",
-                padding: "12px 16px",
+                padding: "12px 13px 12px 20px",
                 borderTop: messages.length > 0 ? "1px solid var(--neutral-alpha-weak)" : "none",
               }}
             >
@@ -384,7 +394,6 @@ export function BlogSearch() {
                 style={{
                   background: isAskHovered ? "var(--brand-alpha-medium)" : "var(--brand-alpha-weak)",
                   border:  isAskHovered ? "1px solid var(--brand-neutral-strong)" : "1px solid var(--brand-alpha-medium)",
-                  
                   padding: "0",
                   width: "32px",
                   height: "32px",
@@ -398,6 +407,7 @@ export function BlogSearch() {
                   fontFamily: "inherit",
                   opacity: loading || !query.trim() ? 0.4 : 1,
                   transition: "opacity 0.2s, background 0.15s",
+                  marginRight: "0px",
                 }}
               >
                 
