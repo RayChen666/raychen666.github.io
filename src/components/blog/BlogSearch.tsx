@@ -251,14 +251,14 @@ export function BlogSearch() {
                     padding: "3px",
                     fontSize: "24px",
                     position: "relative",
-                    top: "1px",
+                    top: "0px",
                   }}
                 >
                   ✦
                 </span>
                 {" "}
                 <span 
-                  style={{ position: "relative", bottom: "2.5px" }}
+                  style={{ position: "relative", bottom: "3.3px" }}
                 >
                   Ask Gemini 
                 </span>
