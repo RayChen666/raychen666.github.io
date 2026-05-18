@@ -39,7 +39,7 @@ export default function Blog() {
       >
         {blog.title}
       </Heading>
-      <Column fillWidth flex={1} gap="32">
+      <Column fillWidth flex={1} gap="s">
         <BlogSearch />
         {/*<Posts range={[1, 1]} thumbnail={true} />*/}
         <Posts range={[1, 4]} columns="2"  thumbnail direction="column" />

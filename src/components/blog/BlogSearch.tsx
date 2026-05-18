@@ -57,6 +57,7 @@ export function BlogSearch() {
   const [loading, setLoading] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
+  const [isAskHovered, setIsAskHovered] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
 
   // Show shine when hovered (closed) OR panel is open (including while loading)
@@ -366,20 +367,45 @@ export function BlogSearch() {
               <button
                 onClick={handleSearch}
                 disabled={loading || !query.trim()}
+                onMouseEnter={() => setIsAskHovered(true)}
+                onMouseLeave={() => setIsAskHovered(false)}
                 style={{
-                  background: "var(--brand-alpha-medium)",
-                  border: "1px solid var(--brand-alpha-strong)",
-                  borderRadius: "var(--radius-m)",
-                  padding: "6px 14px",
+                  background: isAskHovered ? "var(--brand-alpha-medium)" : "var(--brand-alpha-weak)",
+                  border:  isAskHovered ? "1px solid var(--brand-neutral-strong)" : "1px solid var(--brand-alpha-medium)",
+                  
+                  padding: "0",
+                  width: "32px",
+                  height: "32px",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  borderRadius: "var(--radius-full)",
                   cursor: loading || !query.trim() ? "not-allowed" : "pointer",
-                  color: "var(--brand-strong)",
+                  color: isAskHovered ? "var(--brand-strong)" : "var(--brand-alpha-strong)",
                   fontSize: "var(--font-size-label-default-s)",
                   fontFamily: "inherit",
                   opacity: loading || !query.trim() ? 0.4 : 1,
-                  transition: "opacity 0.2s",
+                  transition: "opacity 0.2s, background 0.15s",
                 }}
               >
-                {loading ? "..." : "Ask"}
+                
+                {loading ? (
+                  <span style={{ width: "5px", height: "5px", borderRadius: "50%", background: "currentColor", opacity: 0.6 }} />
+                ) : (
+                  <svg
+                    width="14"
+                    height="14"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
+                    <line x1="12" y1="19" x2="12" y2="5" />
+                    <polyline points="5 12 12 5 19 12" />
+                  </svg>
+                )}
               </button>
             </div>
           </div>
