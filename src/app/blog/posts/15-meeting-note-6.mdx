@@ -131,7 +131,13 @@ the location — any after-the-fact "now point at it" prompt is clunky and unnat
 The correct approach is to **passively stream gaze / head position during voice input at all times**, and simply
 read from that buffer when the parsed command requires it. The flow looks like:
  
-```
+<CodeBlock
+    marginBottom="16"
+    style={{ borderRadius: '20px' }}
+    codes={[
+      {
+        code:
+`
 voice input  ──────────────────────────────► NLP pipeline
                                                    │
 head gaze (continuous, passive)  ──────────► timestamped position buffer
@@ -139,8 +145,12 @@ head gaze (continuous, passive)  ──────────► timestamped p
                                               if bare deictic detected
                                               → look up gaze position at
                                                 time of utterance
-```
- 
+`,
+        language: "txt",
+      }
+    ]}
+/>
+
 Gaze data is always captured; it's only *consumed* when language signals it's needed. No buttons, no modes, no UX friction.
  
 ## No User-Facing Controls
