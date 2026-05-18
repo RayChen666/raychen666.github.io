@@ -241,7 +241,19 @@ export function BlogSearch() {
                   opacity: 0.7,
                 }}
               >
-                Search posts
+                <span
+                  style={{
+                    background: "linear-gradient(135deg, red 0%, orange 40%, yellow 55%, green 65%, blue 85%)",
+                    WebkitBackgroundClip: "text",
+                    backgroundClip: "text",
+                    WebkitTextFillColor: "transparent",
+                    color: "transparent",
+                    fontSize: "15px",
+                  }}
+                >
+                  ✦
+                </span>
+                {" "}Ask AI
               </span>
               <button
                 onClick={handleClose}
