@@ -18,6 +18,7 @@ export async function POST(req: NextRequest) {
     publishedAt: post.metadata.publishedAt,
     slug: post.slug,
     url: `/blog/${post.slug}`,
+    content: post.content,
   }));
 
   const systemPrompt = `You are a helpful search assistant for Ray's personal blog at raychen666.vercel.app.
@@ -52,7 +53,7 @@ When the user asks a question or types a search query:
           },
         ],
         generationConfig: {
-          maxOutputTokens: 500,
+          maxOutputTokens: 2000,
         },
       }),
     }
