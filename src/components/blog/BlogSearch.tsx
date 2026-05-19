@@ -157,6 +157,7 @@ export function BlogSearch() {
           {showShine && (
             <ShineBorder
               shineColor={["#5ba3c9", "#ffffff", "#5ba3c9"]}
+              //shineColor={["#ff0000", "#ff7700", "#ffff00", "#00ff00", "#0000ff", "#8b00ff"]}
               duration={6}
               borderWidth={0.6}
             />
@@ -211,6 +212,7 @@ export function BlogSearch() {
           {/* ShineBorder always visible while panel is open */}
           <ShineBorder
             shineColor={["#5ba3c9", "#ffffff", "#5ba3c9"]}
+            //shineColor={["#ff0000", "#ff7700", "#ffff00", "#00ff00", "#0000ff", "#8b00ff"]}
             duration={6}
             borderWidth={0.6}
           />
@@ -260,7 +262,7 @@ export function BlogSearch() {
                 <span 
                   style={{ position: "relative", bottom: "3.3px" }}
                 >
-                  Ask Gemini 
+                  Ask AI · Gemini
                 </span>
               </span>
               <button
